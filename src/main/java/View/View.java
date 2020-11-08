@@ -1,3 +1,5 @@
+package View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,8 @@ public class View {
     public View(String s,int x,int y) {
         JFrame frame=new JFrame(s);
         menuBar=new JMenuBar();
+        menuBar.setSize(50,400);
+        menuBar.setForeground(new Color(0,0,255));
         createFileMenu();
         createImageMenu();
         createColorMenu();
@@ -22,6 +26,7 @@ public class View {
         // frame.setContentPane(mainPanel);
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
+
 
 
 
@@ -38,6 +43,7 @@ public class View {
         i3= new JMenuItem("Recents");
         i4=new JMenuItem("Save image");
         i5= new JMenuItem("Exit");
+        menu1.setBorderPainted(true);
 
         menu1.add(i1);
         menu1.add(i2);
