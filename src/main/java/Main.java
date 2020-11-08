@@ -6,7 +6,7 @@ public class Main{
         System.out.println("Que pasa aqui?");
         System.out.println("Yo como manzanas.");
         System.out.println("yo no!!!");
-        System.out.println("No entiendo!");
+        System.out.println("No entieplndo!");
 
         //View v=new View("MyApp",400,400);
 
