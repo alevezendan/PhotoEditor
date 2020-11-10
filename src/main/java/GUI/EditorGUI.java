@@ -10,11 +10,19 @@ import javafx.fxml.FXMLLoader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class EditorGUI extends Application {
 
+    private VBox root;
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+        Stage stage = (Stage) root.getScene().getWindow();
     }
 
     @Override
@@ -33,7 +41,7 @@ public class EditorGUI extends Application {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "X:\\faculta\\year 3\\IS\\PhotoEditor\\PhotoEditor\\src\\main\\java\\GUI\\gui_test.fxml";
+        String fxmlDocPath = "src\\main\\java\\GUI\\gui_test.fxml";
         FileInputStream fxmlStream = null;
         try {
             fxmlStream = new FileInputStream(fxmlDocPath);
@@ -42,13 +50,27 @@ public class EditorGUI extends Application {
         }
 
         // Create the Pane and all Details
-        VBox root = null;
+        /*VBox root = null;
         try {
             root = (VBox) loader.load(fxmlStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+       // VBox root=null;
+        this.initialize("src\\main\\java\\GUI\\gui_test.fxml",);
+        try {
+             //root = (VBox) loader.load(fxmlStream);
+            root =  loader.load(fxmlStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        /*Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         // Create the Scene
         Scene scene = new Scene(root);
         // Set the Scene to the Stage
