@@ -18,17 +18,6 @@ public class EditorGUI extends Application {
 
     @Override
     public void start(Stage stage) {
-        /*
-        Parent root = null;
-        try {
-            root = new FXMLLoader(this.getClass().getResource("GUI//gui_test.fxml")).load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        primaryStage.setTitle("Dice Roller");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();*/
-
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
