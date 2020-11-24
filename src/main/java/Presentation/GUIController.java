@@ -25,6 +25,7 @@ public class GUIController {
     // Add a public no-args constructor
     public void FxFXMLController()
     {
+
     }
 
     @FXML
