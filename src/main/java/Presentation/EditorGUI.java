@@ -1,11 +1,10 @@
-package GUI;
+package Presentation;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +32,7 @@ public class EditorGUI extends Application {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "src\\main\\java\\GUI\\gui_test.fxml";
+        String fxmlDocPath = "src\\main\\java\\Presentation\\gui_test.fxml";
         FileInputStream fxmlStream = null;
         try {
             fxmlStream = new FileInputStream(fxmlDocPath);
