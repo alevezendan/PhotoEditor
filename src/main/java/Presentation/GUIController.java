@@ -1,4 +1,4 @@
-package GUI;
+package Presentation;
 
 import javafx.fxml.FXML;
 
@@ -25,6 +25,7 @@ public class GUIController {
     // Add a public no-args constructor
     public void FxFXMLController()
     {
+
     }
 
     @FXML
