@@ -4,5 +4,5 @@ module mod {
     requires javafx.fxml;
     requires java.desktop;
 
-    opens Presentation;
+    opens GUI;
 }
