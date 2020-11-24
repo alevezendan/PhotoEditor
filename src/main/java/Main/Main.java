@@ -8,5 +8,11 @@ public class Main{
         System.out.println("Yo como manzanas.");
         System.out.println("yo no!!!");
         System.out.println("No entieplndo!");
+
+        //View v=new View("MyApp",400,400);
+
+        //JFrame mainFrame=new View("MyApp",400,400);
+        //mainFrame.setVisible(true);
+       // v.setVisible(true);
     }
 }
