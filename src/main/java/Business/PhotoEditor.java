@@ -19,7 +19,7 @@ public class PhotoEditor implements IPhotoEditor{
 
     @Override
     public void loadImage(String path) {
-        System.out.println("hihi load image");
+        System.out.println("Loaded image " + path + " to Photo Editor");
     }
 
     @Override

@@ -1,18 +1,25 @@
 package Presentation;
 
 import Business.IPhotoEditor;
+import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GUIController {
     private IPhotoEditor photoEditor;
 
+    @FXML
+    public ImageView imageView;
     @FXML
     private javafx.scene.control.MenuItem openImageBtn;
     @FXML
@@ -38,6 +45,9 @@ public class GUIController {
     @FXML
     private void initialize()
     {
+        System.out.println("Initialized");
+        imageView = new ImageView();
+        photoEditor = new PhotoEditor();
     }
 
     @FXML
@@ -49,11 +59,19 @@ public class GUIController {
     public void OpenImageBtnAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG files", "*.png"),
-                new FileChooser.ExtensionFilter("JOEG files", "*.jpeg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files", "*.png"));
 
-        if (selectedFile != null) {
-            photoEditor.loadImage(selectedFile.getAbsolutePath());
+        try {
+            System.out.println("Showing image " + selectedFile.getName());
+            FileInputStream stream = new FileInputStream(selectedFile.getAbsolutePath());
+            Image image = new Image(selectedFile.toURI().toString());
+            imageView.setImage(image);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
+
+        photoEditor.loadImage(selectedFile.getAbsolutePath());
     }
 }
