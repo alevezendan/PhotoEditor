@@ -37,13 +37,9 @@ public class EditorGUI extends Application {
             e.printStackTrace();
         }
 
-        // Create the Scene
         Scene scene = new Scene(root);
-        // Set the Scene to the Stage
         stage.setScene(scene);
-        // Set the Title to the Stage
         stage.setTitle("A simple FXML Example");
-        // Display the Stage
         stage.show();
     }
 }
