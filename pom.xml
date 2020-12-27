@@ -26,6 +26,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>15.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>16-ea+4</version>
+        </dependency>
     </dependencies>
 
     <build>

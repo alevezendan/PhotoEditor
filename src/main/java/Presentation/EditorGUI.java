@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class EditorGUI extends Application {
 
+    public Scene scene;
     public static void main(String[] args) {
         launch(args);
     }
@@ -37,7 +38,7 @@ public class EditorGUI extends Application {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root);
+         scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("A simple FXML Example");
         stage.show();
