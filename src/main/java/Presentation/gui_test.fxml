@@ -78,7 +78,7 @@
                 <Button mnemonicParsing="false" text="Button">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
-                            <Image url="@icons/icon_crop.png" />
+                            <Image url="@icons/icon_crop.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
@@ -125,9 +125,9 @@
                 <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="6">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
-                            <image>
+
                                 <Image url="@icons/icons8-zoom-out-64.png" />
-                            </image>
+
                         </ImageView>
                     </graphic>
                 </Button>
