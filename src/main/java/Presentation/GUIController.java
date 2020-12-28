@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -168,12 +169,14 @@ public class GUIController {
 
     @FXML
     void FlipHorizontalBtnAction(ActionEvent event) {
-
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.scaleYProperty().set(-1.0);
     }
 
     @FXML
     void FlipVerticalBtnAction(ActionEvent event) {
-
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.scaleXProperty().set(-1.0);
     }
 
     @FXML
@@ -256,26 +259,32 @@ public class GUIController {
     void RotateLeftBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         img.setRotate(-90);
-        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+      // ImageView i=img;
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(i);
     }
 
-    @FXML
+
+   @FXML
     void RotateRightBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         img.setRotate(90);
-        
-        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
 
     }
 
     @FXML
     void ZoomInBtnAction(ActionEvent event) {
-
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.setFitWidth(img.getFitWidth()+2);
+        img.setFitHeight(img.getFitHeight()+2);
     }
 
     @FXML
     void ZoomOutBtnAction(ActionEvent event) {
-
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.setFitWidth(img.getFitWidth()-2);
+        img.setFitHeight(img.getFitHeight()-2);
     }
 
 

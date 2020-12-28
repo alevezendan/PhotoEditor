@@ -74,15 +74,15 @@
             </rowConstraints>
             <children>
 
-                <Button mnemonicParsing="false" onAction="#CropBtnAction" text="Button" />
-                <Button mnemonicParsing="false" onAction="#ResizeBtnAction" text="Button" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" onAction="#RotateLeftBtnAction" text="Button" GridPane.rowIndex="2" />
-                <Button mnemonicParsing="false" onAction="#RotateRightBtnAction" text="Button" GridPane.rowIndex="3" />
-                <Button mnemonicParsing="false" onAction="#FlipHorizontalBtnAction" text="Button" GridPane.rowIndex="4" />
-                <Button mnemonicParsing="false" onAction="#FlipVerticalBtnAction" text="Button" GridPane.rowIndex="5" />
-                <Button mnemonicParsing="false" onAction="#ZoomInBtnAction" text="Button" GridPane.rowIndex="6" />
+                <Button mnemonicParsing="false" onAction="#CropBtnAction" text="Crop" />
+                <Button mnemonicParsing="false" onAction="#ResizeBtnAction" text="Resize" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#RotateLeftBtnAction" text="RoteteLeft" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#RotateRightBtnAction" text="RotateRight" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" onAction="#FlipHorizontalBtnAction" text="FlipHorizontal" GridPane.rowIndex="4" />
+                <Button mnemonicParsing="false" onAction="#FlipVerticalBtnAction" text="FlipVertical" GridPane.rowIndex="5" />
+                <Button mnemonicParsing="false" onAction="#ZoomInBtnAction" text="ZoomIn" GridPane.rowIndex="6" />
          
-                <Button mnemonicParsing="false" onAction="#ZoomOutBtnAction" text="Button" GridPane.rowIndex="7" />
+                <Button mnemonicParsing="false" onAction="#ZoomOutBtnAction" text="ZoomOut" GridPane.rowIndex="7" />
             </children>
         </GridPane>
         <Pane layoutX="58.0" layoutY="1.0" prefHeight="351.0" prefWidth="563.0" visible="false">
