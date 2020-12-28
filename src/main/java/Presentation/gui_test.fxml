@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -34,6 +33,7 @@
         <Menu mnemonicParsing="false" text="Edit">
             <MenuItem mnemonicParsing="false" text="Undo" />
             <MenuItem mnemonicParsing="false" text="Redo" />
+         <MenuItem mnemonicParsing="false" onAction="#DuplicateAction" text="Duplicate" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Cut" />
             <MenuItem mnemonicParsing="false" text="Copy" />
@@ -74,79 +74,21 @@
             </rowConstraints>
             <children>
 
-                <Button mnemonicParsing="false" text="Button">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icon_crop.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-                </Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-resize-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="2">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-rotate-left-100.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="3">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-rotate-right-100.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="4">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-flip-horizontal-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="5">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-flip-vertical-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="6">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-zoom-in-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-                </Button>
-                <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="7">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@icons8-zoom-out-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-                </Button>
+                <Button mnemonicParsing="false" onAction="#CropBtnAction" text="Button" />
+                <Button mnemonicParsing="false" onAction="#ResizeBtnAction" text="Button" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#RotateLeftBtnAction" text="Button" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#RotateRightBtnAction" text="Button" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" onAction="#FlipHorizontalBtnAction" text="Button" GridPane.rowIndex="4" />
+                <Button mnemonicParsing="false" onAction="#FlipVerticalBtnAction" text="Button" GridPane.rowIndex="5" />
+                <Button mnemonicParsing="false" onAction="#ZoomInBtnAction" text="Button" GridPane.rowIndex="6" />
+         
+                <Button mnemonicParsing="false" onAction="#ZoomOutBtnAction" text="Button" GridPane.rowIndex="7" />
             </children>
         </GridPane>
         <Pane layoutX="58.0" layoutY="1.0" prefHeight="351.0" prefWidth="563.0" visible="false">
-         <children>
-            <ImageView fx:id="imageView" fitHeight="10.0" fitWidth="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-         </children></Pane>
-      <TabPane fx:id="TabPanee" layoutX="29.0" layoutY="-25.0" prefHeight="351.0" prefWidth="542.0" tabClosingPolicy="UNAVAILABLE" />
+            <children>
+                <ImageView fx:id="imageView" fitHeight="10.0" fitWidth="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            </children></Pane>
+        <TabPane fx:id="TabPanee" layoutX="68.0" layoutY="1.0" prefHeight="351.0" prefWidth="542.0" tabClosingPolicy="UNAVAILABLE" />
     </AnchorPane>
 </VBox>

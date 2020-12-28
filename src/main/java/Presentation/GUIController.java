@@ -4,16 +4,23 @@ import Business.IPhotoEditor;
 import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -26,6 +33,17 @@ public class GUIController {
     @FXML
     private TabPane TabPanee;
 
+    @FXML
+    private TextField ActualWidth;
+
+    @FXML
+    private TextField ActualHeight;
+
+    @FXML
+    private TextField NewWidth;
+
+    @FXML
+    private TextField NewHeight;
     @FXML
     private javafx.scene.control.MenuItem openImageBtn;
     @FXML
@@ -133,5 +151,132 @@ public class GUIController {
        Image i=img.getImage();
        BufferedImage bImage = SwingFXUtils.fromFXImage(i, null);
     }*/
+   @FXML
+   void CropBtnAction(ActionEvent event) {
+
+   }
+
+    @FXML
+    void DuplicateAction(ActionEvent event) {
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Tab t=new Tab();
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+        t.setText(TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getText()+"Copy");
+        t.setContent(img);
+        TabPanee.getTabs().add(t);
+    }
+
+    @FXML
+    void FlipHorizontalBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void FlipVerticalBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ApplyBtnAction(ActionEvent event) {
+        //ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        ImageView img= (ImageView) TabPanee.getTabs().get(0).getContent();
+        System.out.println(img.getImage().getWidth());
+        System.out.println(NewHeight.getText());
+        //  ActualWidth.setText(Double.toString(img.getImage().getWidth()));
+        //  ActualHeight.setText(Double.toString(img.getImage().getHeight()));
+       Image i=img.getImage();
+
+       /* try{
+
+            img.setFitHeight(Double.parseDouble(NewHeight.getText()));}
+        catch(Exception e){
+            System.out.println("Set width!");
+        }
+        try{
+            img.setFitWidth(Double.parseDouble(NewWidth.getText()));}
+        catch(Exception e){
+            System.out.println("Set height!");
+        }*/
+        //Tab t=new Tab();
+        //t.setContent(img);
+        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+
+    }
+
+    @FXML
+    void ResizeBtnAction(ActionEvent event) {
+
+        /*try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("src\\main\\java\\Presentation\\Resize.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
+            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setTitle("Resize Image");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }catch(Exception e){
+            System.out.println("Cannot load new window");
+        }
+*/
+
+        FXMLLoader loader = new FXMLLoader();
+        // Path to the FXML File
+        String fxmlDocPath = "src\\main\\java\\Presentation\\Resize.fxml";
+        FileInputStream fxmlStream = null;
+        try {
+            fxmlStream = new FileInputStream(fxmlDocPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        // Create the Pane and all Details
+       /* VBox root = null;
+        try {
+            root = (VBox) loader.load(fxmlStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        Parent root1 = null;
+        try {
+            root1 = (Parent) loader.load(fxmlStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root1);
+        Stage stage =new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Resize Image");
+        stage.show();
+    }
+
+    @FXML
+    void RotateLeftBtnAction(ActionEvent event) {
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.setRotate(-90);
+        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+    }
+
+    @FXML
+    void RotateRightBtnAction(ActionEvent event) {
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        img.setRotate(90);
+        
+        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+
+    }
+
+    @FXML
+    void ZoomInBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ZoomOutBtnAction(ActionEvent event) {
+
+    }
+
 
 }
