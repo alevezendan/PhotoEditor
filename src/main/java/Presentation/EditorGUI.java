@@ -40,7 +40,7 @@ public class EditorGUI extends Application {
 
          scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("A simple FXML Example");
+        stage.setTitle("PhotoEditor");
         stage.show();
     }
 }
