@@ -1,13 +1,14 @@
 package Business.Operations;
 
 import Business.Operation;
+import javafx.scene.image.ImageView;
 
 import java.awt.image.BufferedImage;
 
 public class Mirror implements Operation {
     @Override
-    public Object apply(Object source) {
-        BufferedImage simg=(BufferedImage)source;
+    public void apply(ImageView source) {
+       /* BufferedImage simg=(BufferedImage)source;
         int width = simg.getWidth();
         int height = simg.getHeight();
         BufferedImage mimg = new BufferedImage(width, height,
@@ -28,7 +29,8 @@ public class Mirror implements Operation {
                 // set mirror image pixel value
                 mimg.setRGB(rx, y, p);
             }
-        }
-        return mimg;
+        }*/
+        //return mimg;
+       // return null;
     }
 }

@@ -21,8 +21,8 @@
                   <Font name="Century Gothic Bold" size="12.0" />
                </font>
             </Text>
-            <TextField  layoutX="125.0" layoutY="70.0" prefHeight="15.0" prefWidth="84.0" />
-            <TextField  layoutX="125.0" layoutY="131.0" prefHeight="15.0" prefWidth="84.0" />
+            <TextField fx:id="W" layoutX="125.0" layoutY="70.0" prefHeight="15.0" prefWidth="84.0" />
+            <TextField fx:id="H" layoutX="125.0" layoutY="131.0" prefHeight="15.0" prefWidth="84.0" />
             <Button layoutX="93.0" layoutY="192.0" mnemonicParsing="false" onAction="#ApplyBtnAction" prefHeight="25.0" prefWidth="64.0" text="Apply" />
          </children>
       </Pane>

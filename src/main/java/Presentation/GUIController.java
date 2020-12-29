@@ -1,6 +1,7 @@
 package Presentation;
 
 import Business.IPhotoEditor;
+import Business.Operations.*;
 import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,21 +31,20 @@ public class GUIController {
     private IPhotoEditor photoEditor;
 
     @FXML
-    public ImageView imageView;
+    private ImageView imageView;
     @FXML
-    private TabPane TabPanee;
+   private  TabPane TabPanee;
+    //@FXML
+    //private TextField W;
 
-    @FXML
-    private TextField ActualWidth;
+   // @FXML
+    //private TextField H;
 
-    @FXML
-    private TextField ActualHeight;
 
-    @FXML
-    private TextField NewWidth;
+    public  TabPane getTabPanee() {
+        return TabPanee;
+    }
 
-    @FXML
-    private TextField NewHeight;
     @FXML
     private javafx.scene.control.MenuItem openImageBtn;
     @FXML
@@ -154,32 +154,45 @@ public class GUIController {
     }*/
    @FXML
    void CropBtnAction(ActionEvent event) {
-
+       ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+      // RubberBandSelection rubberBandSelection;
    }
 
     @FXML
     void DuplicateAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        ImageView img1=img;
         Tab t=new Tab();
+
+
         //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
         t.setText(TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getText()+"Copy");
         t.setContent(img);
-        TabPanee.getTabs().add(t);
+      TabPanee.getTabs().add(t);
+        Tab current=TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex());
+        current.setContent(img1);
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
     }
 
     @FXML
     void FlipHorizontalBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.scaleYProperty().set(-1.0);
+        FlipHorizontal flipH=new FlipHorizontal();
+        flipH.apply(img);
+
     }
 
     @FXML
     void FlipVerticalBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.scaleXProperty().set(-1.0);
+        //img.scaleXProperty().set(-1.0);
+        FlipVertical flip=new FlipVertical();
+        flip.apply(img);
     }
 
     @FXML
+    void ApplyBtnAction(ActionEvent event) {}
+   /* @FXML
     void ApplyBtnAction(ActionEvent event) {
         //ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         ImageView img= (ImageView) TabPanee.getTabs().get(0).getContent();
@@ -199,28 +212,36 @@ public class GUIController {
             img.setFitWidth(Double.parseDouble(NewWidth.getText()));}
         catch(Exception e){
             System.out.println("Set height!");
-        }*/
+        }
         //Tab t=new Tab();
         //t.setContent(img);
         TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
 
-    }
+    }*/
+
 
     @FXML
-    void ResizeBtnAction(ActionEvent event) {
-
-        /*try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("src\\main\\java\\Presentation\\Resize.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            //stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setTitle("Resize Image");
-            stage.setScene(new Scene(root1));
-            stage.show();
+    void OkBTN(ActionEvent event) {
+        ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        System.out.println(img.getImage().getWidth());
+        try {
+           // System.out.println(H.getText());
         }catch(Exception e){
-            System.out.println("Cannot load new window");
+            System.out.println("err");
         }
-*/
+        //  ActualWidth.setText(Double.toString(img.getImage().getWidth()));
+        //  ActualHeight.setText(Double.toString(img.getImage().getHeight()));
+        Image i=img.getImage();
+        try {
+           // img.setFitHeight(Double.parseDouble(H.getText()));
+        }catch(Exception e){
+            System.out.println("err");
+        }
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+
+    }
+    @FXML
+    void ResizeBtnAction(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
@@ -232,14 +253,6 @@ public class GUIController {
             e.printStackTrace();
         }
 
-
-        // Create the Pane and all Details
-       /* VBox root = null;
-        try {
-            root = (VBox) loader.load(fxmlStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         Parent root1 = null;
         try {
@@ -258,33 +271,32 @@ public class GUIController {
     @FXML
     void RotateLeftBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.setRotate(-90);
-      // ImageView i=img;
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(i);
+        RotateCounterclockwise rotL=new RotateCounterclockwise();
+        rotL.apply(img);
     }
 
 
    @FXML
     void RotateRightBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.setRotate(90);
-
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
-
+       RotateClockwise rotR=new RotateClockwise();
+       rotR.apply(img);
     }
 
     @FXML
     void ZoomInBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.setFitWidth(img.getFitWidth()+2);
-        img.setFitHeight(img.getFitHeight()+2);
+        ZoomIn zoomIn=new ZoomIn();
+        zoomIn.apply(img);
+
+
     }
 
     @FXML
     void ZoomOutBtnAction(ActionEvent event) {
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        img.setFitWidth(img.getFitWidth()-2);
-        img.setFitHeight(img.getFitHeight()-2);
+        ZoomOut zoomOut=new ZoomOut();
+        zoomOut.apply(img);
     }
 
 

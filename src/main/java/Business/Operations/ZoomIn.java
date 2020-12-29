@@ -3,9 +3,10 @@ package Business.Operations;
 import Business.Operation;
 import javafx.scene.image.ImageView;
 
-public class RotateClockwise implements Operation {
+public class ZoomIn implements Operation {
     @Override
     public void apply(ImageView source) {
-        source.setRotate(source.getRotate()+90);
+        source.setFitWidth( source.getFitWidth()+2);
+        source.setFitHeight( source.getFitHeight()+2);
     }
 }

@@ -1,5 +1,7 @@
 package Business;
 
+import javafx.scene.image.ImageView;
+
 public interface Operation {
-    Object apply(Object source);
+     void apply(ImageView source);
 }
