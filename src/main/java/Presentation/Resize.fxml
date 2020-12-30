@@ -7,7 +7,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="250.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.GUIController">
+
+<AnchorPane prefHeight="250.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.Controller2">
    <children>
       <Pane layoutX="-1.0" prefHeight="250.0" prefWidth="250.0">
          <children>
@@ -21,8 +22,8 @@
                   <Font name="Century Gothic Bold" size="12.0" />
                </font>
             </Text>
-            <TextField fx:id="W" layoutX="125.0" layoutY="70.0" prefHeight="15.0" prefWidth="84.0" />
-            <TextField fx:id="H" layoutX="125.0" layoutY="131.0" prefHeight="15.0" prefWidth="84.0" />
+            <TextField fx:id="W" layoutX="125.0" layoutY="70.0" onAction="#Width" prefHeight="15.0" prefWidth="84.0"  />
+            <TextField  fx:id="H" layoutX="125.0" layoutY="131.0" onAction="#Height" prefHeight="15.0" prefWidth="84.0" />
             <Button layoutX="93.0" layoutY="192.0" mnemonicParsing="false" onAction="#ApplyBtnAction" prefHeight="25.0" prefWidth="64.0" text="Apply" />
          </children>
       </Pane>

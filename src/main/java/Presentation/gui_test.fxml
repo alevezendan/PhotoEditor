@@ -93,7 +93,6 @@
             <children>
                 <ImageView fx:id="imageView" fitHeight="10.0" fitWidth="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
             </children></Pane>
-        <TabPane fx:id="TabPanee" layoutX="68.0" layoutY="1.0" prefHeight="351.0" prefWidth="542.0" tabClosingPolicy="UNAVAILABLE" />
-      <Button layoutX="82.0" layoutY="340.0" mnemonicParsing="false" onAction="#OkBTN" text="Button" />
+        <TabPane fx:id="TabPanee" layoutX="72.0" layoutY="24.0" prefHeight="336.0" prefWidth="546.0" tabClosingPolicy="UNAVAILABLE" />
     </AnchorPane>
 </VBox>

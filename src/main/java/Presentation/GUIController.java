@@ -1,10 +1,12 @@
 package Presentation;
 
+
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,10 +14,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.effect.ColorAdjust;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -24,48 +28,25 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.security.cert.X509Certificate;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
 
 public class GUIController {
     private IPhotoEditor photoEditor;
 
+    @FXML Controller2 contr;
     @FXML
     private ImageView imageView;
     @FXML
-   private  TabPane TabPanee;
-    //@FXML
-    //private TextField W;
+   private TabPane TabPanee;
 
-   // @FXML
-    //private TextField H;
-
-
-    public  TabPane getTabPanee() {
+    public TabPane getTabPanee() {
         return TabPanee;
     }
 
-    @FXML
-    private javafx.scene.control.MenuItem openImageBtn;
-    @FXML
-    // The reference of inputText will be injected by the FXML loader
-    private TextField inputText;
 
-    // The reference of outputText will be injected by the FXML loader
-    @FXML
-    private TextArea outputText;
-
-    // location and resources will be automatically injected by the FXML loader
-    @FXML
-    private URL location;
-
-    @FXML
-    private ResourceBundle resources;
-
-    // Add a public no-args constructor
-    public void FxFXMLController()
-    {
-    }
 
     @FXML
     private void initialize()
@@ -73,13 +54,20 @@ public class GUIController {
         System.out.println("Initialized");
         imageView = new ImageView();
         photoEditor = new PhotoEditor();
+
     }
 
-    @FXML
-    private void printOutput()
-    {
-        outputText.setText(inputText.getText());
-    }
+public Double getWContr2(){
+        return Double.parseDouble(contr.getW().getText());
+}
+
+public Double getHContr2(){
+        return  Double.parseDouble(contr.getH().getText());
+}
+
+public void apply(){
+
+}
 
     public void OpenImageBtnAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -156,6 +144,11 @@ public class GUIController {
    void CropBtnAction(ActionEvent event) {
        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
       // RubberBandSelection rubberBandSelection;
+       Cropp c =new Cropp(img);
+       //c.init(img);
+       //c.apply(img);
+      // ImageView i=c.crop(c.getRubberBandSelection().getBounds(),img);
+      // TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(i);
    }
 
     @FXML
@@ -191,82 +184,86 @@ public class GUIController {
     }
 
     @FXML
-    void ApplyBtnAction(ActionEvent event) {}
-   /* @FXML
     void ApplyBtnAction(ActionEvent event) {
-        //ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        ImageView img= (ImageView) TabPanee.getTabs().get(0).getContent();
-        System.out.println(img.getImage().getWidth());
-        System.out.println(NewHeight.getText());
-        //  ActualWidth.setText(Double.toString(img.getImage().getWidth()));
-        //  ActualHeight.setText(Double.toString(img.getImage().getHeight()));
-       Image i=img.getImage();
 
-       /* try{
-
-            img.setFitHeight(Double.parseDouble(NewHeight.getText()));}
-        catch(Exception e){
-            System.out.println("Set width!");
-        }
-        try{
-            img.setFitWidth(Double.parseDouble(NewWidth.getText()));}
-        catch(Exception e){
-            System.out.println("Set height!");
-        }
-        //Tab t=new Tab();
-        //t.setContent(img);
-        TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
-
-    }*/
-
-
-    @FXML
-    void OkBTN(ActionEvent event) {
-        ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        System.out.println(img.getImage().getWidth());
-        try {
-           // System.out.println(H.getText());
-        }catch(Exception e){
-            System.out.println("err");
-        }
-        //  ActualWidth.setText(Double.toString(img.getImage().getWidth()));
-        //  ActualHeight.setText(Double.toString(img.getImage().getHeight()));
-        Image i=img.getImage();
-        try {
-           // img.setFitHeight(Double.parseDouble(H.getText()));
-        }catch(Exception e){
-            System.out.println("err");
-        }
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
-
+       // inflate(controller);
     }
+
+
+
+
     @FXML
     void ResizeBtnAction(ActionEvent event) {
-
-        FXMLLoader loader = new FXMLLoader();
+        try{
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
+        FXMLLoader loader=new FXMLLoader();
         // Path to the FXML File
         String fxmlDocPath = "src\\main\\java\\Presentation\\Resize.fxml";
         FileInputStream fxmlStream = null;
-        try {
+
+        //try {
             fxmlStream = new FileInputStream(fxmlDocPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+            Parent parent=loader.load(fxmlStream);
+           // GUIController c=(GUIController)loader.getController();
 
+          // Controller2 controller=(Controller2)loader.getController();
+            contr=(Controller2)loader.getController();
+           // controller.inflateUI(this);
+           // this.inflate(controller);
 
-        Parent root1 = null;
+        //} catch (FileNotFoundException e) {
+            //e.printStackTrace();
+       // }
+       /* Parent root1 = null;
         try {
             root1 = (Parent) loader.load(fxmlStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+                Stage stage =new Stage();
+                 stage.setTitle("Resize Image");
+
+
+             stage.setScene(new Scene(parent));
+
+             stage.show();
+            contr.init(this);
+
         }
 
-        Scene scene = new Scene(root1);
-        Stage stage =new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Resize Image");
-        stage.show();
+        catch(IOException e){
+                 System.out.println("eferg");
+        }
     }
+
+    public void inflate(Controller2 contr){
+       double W=getWContr2();
+       double H=getHContr2();
+       int i=TabPanee.getSelectionModel().getSelectedIndex();
+       ImageView img= (ImageView) TabPanee.getTabs().get(i).getContent();
+       img.setFitWidth(W);
+       img.setFitHeight(H);
+       TabPanee.getTabs().get(i).setContent(img);
+
+
+    }
+
+    @FXML
+    void OkBTN(ActionEvent event) {
+       // ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+      //  Crop c=new Crop();
+       // c.getAreaSelection();
+        //int newW=Integer.parseInt(W.getText());
+        //int newH=Integer.parseInt(H.getText());
+        //System.out.println(W.getText());
+       // img.setFitHeight(newH);
+        //img.setFitWidth(newW);
+
+        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+
+    }
+
+
 
     @FXML
     void RotateLeftBtnAction(ActionEvent event) {
