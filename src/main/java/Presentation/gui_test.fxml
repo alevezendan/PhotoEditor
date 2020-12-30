@@ -50,7 +50,7 @@
             <items>
                 <MenuItem mnemonicParsing="false" text="Balance" />
                 <MenuItem mnemonicParsing="false" text="Saturation" />
-                <MenuItem mnemonicParsing="false" text="Brightness" />
+                <MenuItem mnemonicParsing="false" onAction="#BrightnessOnAction" text="Brightness" />
                 <MenuItem mnemonicParsing="false" text="Contrast" />
                 <MenuItem mnemonicParsing="false" text="Sepia" />
                 <MenuItem mnemonicParsing="false" text="Invert" />

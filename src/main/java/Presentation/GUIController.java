@@ -1,6 +1,7 @@
 package Presentation;
 
 
+import Business.ColorParameters.Brightness;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
@@ -36,7 +37,8 @@ import java.util.ResourceBundle;
 public class GUIController {
     private IPhotoEditor photoEditor;
 
-    @FXML Controller2 contr;
+    @FXML RESIZEController resContr;
+    @FXML BRIGHTController brightContr;
     @FXML
     private ImageView imageView;
     @FXML
@@ -58,11 +60,11 @@ public class GUIController {
     }
 
 public Double getWContr2(){
-        return Double.parseDouble(contr.getW().getText());
+        return Double.parseDouble(resContr.getW().getText());
 }
 
 public Double getHContr2(){
-        return  Double.parseDouble(contr.getH().getText());
+        return  Double.parseDouble(resContr.getH().getText());
 }
 
 public void apply(){
@@ -90,6 +92,9 @@ public void apply(){
         Tab tab1=new Tab();
         tab1.setText("NewImage");
         tab1.setContent(view);
+        tab1.closableProperty();
+        tab1.setClosable(true);
+
 
         TabPanee.getTabs().add(tab1);
 
@@ -156,15 +161,11 @@ public void apply(){
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         ImageView img1=img;
         Tab t=new Tab();
-
-
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
         t.setText(TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getText()+"Copy");
         t.setContent(img);
-      TabPanee.getTabs().add(t);
+        TabPanee.getTabs().add(t);
         Tab current=TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex());
         current.setContent(img1);
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
     }
 
     @FXML
@@ -184,85 +185,49 @@ public void apply(){
     }
 
     @FXML
-    void ApplyBtnAction(ActionEvent event) {
-
-       // inflate(controller);
-    }
-
-
-
-
-    @FXML
     void ResizeBtnAction(ActionEvent event) {
         try{
             // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
-        FXMLLoader loader=new FXMLLoader();
+            FXMLLoader loader=new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "src\\main\\java\\Presentation\\Resize.fxml";
-        FileInputStream fxmlStream = null;
+            String fxmlDocPath = "src\\main\\java\\Presentation\\Resize.fxml";
+             FileInputStream fxmlStream = null;
+             fxmlStream = new FileInputStream(fxmlDocPath);
+             Parent parent=loader.load(fxmlStream);
+             resContr= loader.getController();
+             Stage stage =new Stage();
+             stage.setTitle("Resize Image");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            resContr.init(this);
 
-        //try {
-            fxmlStream = new FileInputStream(fxmlDocPath);
-            Parent parent=loader.load(fxmlStream);
-           // GUIController c=(GUIController)loader.getController();
-
-          // Controller2 controller=(Controller2)loader.getController();
-            contr=(Controller2)loader.getController();
-           // controller.inflateUI(this);
-           // this.inflate(controller);
-
-        //} catch (FileNotFoundException e) {
-            //e.printStackTrace();
-       // }
-       /* Parent root1 = null;
-        try {
-            root1 = (Parent) loader.load(fxmlStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-                Stage stage =new Stage();
-                 stage.setTitle("Resize Image");
-
-
-             stage.setScene(new Scene(parent));
-
-             stage.show();
-            contr.init(this);
-
-        }
-
-        catch(IOException e){
+        } catch(IOException e){
                  System.out.println("eferg");
         }
     }
 
-    public void inflate(Controller2 contr){
+    public void inflate(RESIZEController contr){
        double W=getWContr2();
        double H=getHContr2();
        int i=TabPanee.getSelectionModel().getSelectedIndex();
        ImageView img= (ImageView) TabPanee.getTabs().get(i).getContent();
+       Resize res=new Resize();
+       res.apply(img);
        img.setFitWidth(W);
        img.setFitHeight(H);
-       TabPanee.getTabs().get(i).setContent(img);
+       //TabPanee.getTabs().get(i).setContent(img);
 
 
     }
 
-    @FXML
-    void OkBTN(ActionEvent event) {
-       // ImageView img=(ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-      //  Crop c=new Crop();
-       // c.getAreaSelection();
-        //int newW=Integer.parseInt(W.getText());
-        //int newH=Integer.parseInt(H.getText());
-        //System.out.println(W.getText());
-       // img.setFitHeight(newH);
-        //img.setFitWidth(newW);
-
-        //TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).setContent(img);
+    public void inflateB(BRIGHTController contr){
+      double val=brightContr.getBrightSlider().getValue();
+        System.out.println((int)val);
+       ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Brightness b=new Brightness();
+        b.apply(img,val);
 
     }
-
 
 
     @FXML
@@ -297,4 +262,26 @@ public void apply(){
     }
 
 
+    @FXML
+    void BrightnessOnAction(ActionEvent event) {
+        try{
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            // Path to the FXML File
+            String fxmlDocPath = "src\\main\\java\\Presentation\\Brightness.fxml";
+            FileInputStream fxmlStream = null;
+            fxmlStream = new FileInputStream(fxmlDocPath);
+            Parent parent=loader.load(fxmlStream);
+            brightContr=loader.getController();
+            Stage stage =new Stage();
+            stage.setTitle("Brightness");
+            stage.setScene(new Scene(parent));
+            stage.show();
+           brightContr.init(this);
+
+        } catch(IOException e){
+            System.out.println("eferg");
+        }
+
+    }
 }

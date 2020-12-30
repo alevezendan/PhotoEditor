@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 
-public class Controller2 {
+public class RESIZEController {
 
     private GUIController gui;
     @FXML
@@ -40,30 +40,14 @@ public class Controller2 {
     }
     @FXML
     void ApplyBtnAction(ActionEvent event) {
-
-        /*ImageView img= (ImageView) gui.getTabPanee().getTabs().get(gui.getTabPanee().getSelectionModel().getSelectedIndex()).getContent();
-        W.setText(Double.toString(img.getFitWidth()));
-        H.setText(Double.toString(img.getFitHeight()));*/
-/*
-
-        ImageView img=(ImageView) GUIController.getTabs().get(c.getTabPanee().getSelectionModel().getSelectedIndex()).getContent();
-
-        int newW=Integer.parseInt(W.getText());
-        int newH=Integer.parseInt(H.getText());
-        //System.out.println(W.getText());
-        img.setFitHeight(newH);
-        img.setFitWidth(newW);
-
-       c.getTabPanee().getTabs().get(c.getTabPanee().getSelectionModel().getSelectedIndex()).setContent(img);
-    }*/
         gui.inflate(this);
     }
 
-    public void inflateUI(GUIController gui){
+    /*public void inflateUI(GUIController gui){
         //W.setText(gui.getTabPanee().getTabs().get(gui.getTabPanee().getSelectionModel().getSelectedIndex()).getText());
         ImageView img= (ImageView) gui.getTabPanee().getTabs().get(gui.getTabPanee().getSelectionModel().getSelectedIndex()).getContent();
         W.setText(Double.toString(img.getFitWidth()));
         H.setText(Double.toString(img.getFitHeight()));
 
-    }
+    }*/
 }
