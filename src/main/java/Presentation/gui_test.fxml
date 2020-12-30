@@ -49,11 +49,12 @@
         <Menu mnemonicParsing="false" text="Color">
             <items>
                 <MenuItem mnemonicParsing="false" text="Balance" />
-                <MenuItem mnemonicParsing="false" text="Saturation" />
+                <MenuItem fx:id="saturation" mnemonicParsing="false" onAction="#SaturationOnAction" text="Saturation" />
                 <MenuItem mnemonicParsing="false" onAction="#BrightnessOnAction" text="Brightness" />
-                <MenuItem mnemonicParsing="false" text="Contrast" />
+                <MenuItem mnemonicParsing="false" onAction="#ContrastOnAction" text="Contrast" />
                 <MenuItem mnemonicParsing="false" text="Sepia" />
                 <MenuItem mnemonicParsing="false" text="Invert" />
+            <MenuItem mnemonicParsing="false" onAction="#HueOnAction" text="Hue" />
             </items>
         </Menu>
     </MenuBar>

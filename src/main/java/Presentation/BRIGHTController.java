@@ -28,6 +28,10 @@ public class BRIGHTController {
         return brightSlider;
     }
 
+    public Spinner<Integer> getSpinner() {
+        return spinner;
+    }
+
     @FXML
     void sw(SwipeEvent event) {
         System.out.println(brightSlider.getValue());
@@ -43,7 +47,8 @@ public class BRIGHTController {
 
     @FXML
     void slider(MouseEvent event) {
-        System.out.println((int)brightSlider.getValue());
+        System.out.println(brightSlider.getValue());
+
     }
 
     /*@FXML

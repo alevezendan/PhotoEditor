@@ -2,11 +2,15 @@ package Presentation;
 
 
 import Business.ColorParameters.Brightness;
+import Business.ColorParameters.Contrast;
+import Business.ColorParameters.Hue;
+import Business.ColorParameters.Saturation;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,6 +43,9 @@ public class GUIController {
 
     @FXML RESIZEController resContr;
     @FXML BRIGHTController brightContr;
+    @FXML SATURATIONController saturContr;
+    @FXML CONTRASTController contrContr;
+    @FXML HUEController hueContr;
     @FXML
     private ImageView imageView;
     @FXML
@@ -67,9 +74,6 @@ public Double getHContr2(){
         return  Double.parseDouble(resContr.getH().getText());
 }
 
-public void apply(){
-
-}
 
     public void OpenImageBtnAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -221,11 +225,33 @@ public void apply(){
     }
 
     public void inflateB(BRIGHTController contr){
-      double val=brightContr.getBrightSlider().getValue();
-        System.out.println((int)val);
+      double val=contr.getBrightSlider().getValue();
        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Brightness b=new Brightness();
         b.apply(img,val);
+
+    }
+
+    public void inflateS(SATURATIONController contr){
+        double val=contr.getSlider().getValue();
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Saturation s=new Saturation();
+        s.apply(img,val);
+
+    }
+
+    public void inflateC(CONTRASTController contr){
+        double val=contr.getSlider().getValue();
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Contrast c=new Contrast();
+        c.apply(img,val);
+
+    }
+    public void inflateH(HUEController contr){
+        double val=contr.getSlider().getValue();
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Hue h=new Hue();
+        h.apply(img,val);
 
     }
 
@@ -284,4 +310,73 @@ public void apply(){
         }
 
     }
+
+
+    @FXML
+    void SaturationOnAction(ActionEvent event) {
+        try{
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            // Path to the FXML File
+            String fxmlDocPath = "src\\main\\java\\Presentation\\Saturation.fxml";
+            FileInputStream fxmlStream = null;
+            fxmlStream = new FileInputStream(fxmlDocPath);
+            Parent parent=loader.load(fxmlStream);
+            saturContr=loader.getController();
+            Stage stage =new Stage();
+            stage.setTitle("Saturation");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            saturContr.init(this);
+
+        } catch(IOException e){
+            System.out.println("eferg");
+        }
+    }
+
+    @FXML
+    void ContrastOnAction(ActionEvent event) {
+        try{
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            // Path to the FXML File
+            String fxmlDocPath = "src\\main\\java\\Presentation\\Contrast.fxml";
+            FileInputStream fxmlStream = null;
+            fxmlStream = new FileInputStream(fxmlDocPath);
+            Parent parent=loader.load(fxmlStream);
+            contrContr=loader.getController();
+            Stage stage =new Stage();
+            stage.setTitle("Saturation");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            contrContr.init(this);
+
+        } catch(IOException e){
+            System.out.println("eferg");
+        }
+    }
+
+    @FXML
+    void HueOnAction(ActionEvent event) {
+        try{
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
+            FXMLLoader loader=new FXMLLoader();
+            // Path to the FXML File
+            String fxmlDocPath = "src\\main\\java\\Presentation\\Hue.fxml";
+            FileInputStream fxmlStream = null;
+            fxmlStream = new FileInputStream(fxmlDocPath);
+            Parent parent=loader.load(fxmlStream);
+            hueContr=loader.getController();
+            Stage stage =new Stage();
+            stage.setTitle("Saturation");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            hueContr.init(this);
+
+        } catch(IOException e){
+            System.out.println("eferg");
+        }
+    }
+
+
 }
