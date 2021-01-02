@@ -5,29 +5,29 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
-public class CONTRASTController extends  Controller{
+public class GAUSSIANBController extends Controller {
 
     private GUIController gui;
-
-
-    @FXML
-    private Slider slider;
-
     public Slider getSlider() {
         return slider;
     }
 
     @FXML
-    void ApplyOnAction(ActionEvent event) {
-        gui.inflateC(this);
+    private Slider slider;
+
+    @FXML
+    void ApplyBtnAction(ActionEvent event) {
+            gui.gaussBlur(this);
     }
 
     @FXML
     void slide(MouseEvent event) {
+        gui.gaussBlur(this);
 
     }
-
-    public void init(GUIController mainGui) {
+    public void init(GUIController mainGui){
         this.gui=mainGui;
-         }
+    }
+
+
 }

@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 public class EditorGUI extends Application {
 
     public Scene scene;
@@ -22,7 +23,7 @@ public class EditorGUI extends Application {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "src\\main\\java\\Presentation\\gui_test.fxml";
+        String fxmlDocPath = "src\\main\\java\\Presentation\\FXMLfiles\\gui_test.fxml";
         FileInputStream fxmlStream = null;
         try {
             fxmlStream = new FileInputStream(fxmlDocPath);

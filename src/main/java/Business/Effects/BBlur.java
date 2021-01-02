@@ -1,16 +1,13 @@
-package Business.Filters;
+package Business.Effects;
 
+import Business.Effect;
 import Business.Filter;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
 
 import java.awt.image.BufferedImage;
 
-public class Blur implements Filter {
-
-    public Blur(){
-
-    }
+public class BBlur implements Effect {
 
     @Override
     public void apply(ImageView source, double val) {

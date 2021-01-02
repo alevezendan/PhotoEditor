@@ -5,11 +5,13 @@ import Business.ColorParameters.Brightness;
 import Business.ColorParameters.Contrast;
 import Business.ColorParameters.Hue;
 import Business.ColorParameters.Saturation;
-import Business.Filters.Blur;
+import Business.Effects.BBlur;
+
+import Business.Effects.GBlur;
+import Business.Effects.MBlur;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
-import Presentation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,10 @@ public class GUIController {
     HUEController hueContr;
     @FXML
     BOXBLURController boxContr;
+    @FXML
+    GAUSSIANBController gaussContr;
+    @FXML
+    MOTIONBController motionContr;
     @FXML
     private ImageView imageView;
     @FXML
@@ -169,7 +175,7 @@ public class GUIController {
 
     @FXML
     void ResizeBtnAction(ActionEvent event) {
-        initNewController(resContr,"src\\main\\java\\Presentation\\Resize.fxml","Resize");
+        initNewController(resContr,"src\\main\\java\\Presentation\\FXMLfiles\\Resize.fxml","Resize");
     }
 
     public void inflate(RESIZEController contr){
@@ -260,39 +266,66 @@ public class GUIController {
 
     @FXML
     void BrightnessOnAction(ActionEvent event) {
-        initNewController(brightContr,"src\\main\\java\\Presentation\\Brightness.fxml","Brightness");
+        initNewController(brightContr,"src\\main\\java\\Presentation\\FXMLfiles\\Brightness.fxml","Brightness");
 
     }
 
 
     @FXML
     void SaturationOnAction(ActionEvent event) {
-        initNewController(saturContr,"src\\main\\java\\Presentation\\Saturation.fxml","Sturation");
+        initNewController(saturContr,"src\\main\\java\\Presentation\\FXMLfiles\\Saturation.fxml","Sturation");
     }
 
     @FXML
     void ContrastOnAction(ActionEvent event) {
-        initNewController(contrContr,"src\\main\\java\\Presentation\\Contrast.fxml","Contrast");
+        initNewController(contrContr,"src\\main\\java\\Presentation\\FXMLfiles\\Contrast.fxml","Contrast");
     }
 
     @FXML
     void HueOnAction(ActionEvent event) {
-        initNewController(hueContr,"src\\main\\java\\Presentation\\Hue.fxml","Hue");
+        initNewController(hueContr,"src\\main\\java\\Presentation\\FXMLfiles\\Hue.fxml","Hue");
     }
 
 
     @FXML
     void BoxBlurOnAction(ActionEvent event) {
-        initNewController(boxContr,"src\\main\\java\\Presentation\\BoxBlur.fxml","BoxBlur");
+        initNewController(boxContr,"src\\main\\java\\Presentation\\FXMLfiles\\BoxBlur.fxml","BoxBlur");
     }
 
     public void boxBlur(BOXBLURController contr){
         double val=  contr.getSlider().getValue();
         System.out.println(val);
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        Blur b=new Blur();
+        BBlur b= new BBlur();
         b.apply(img,val);
 
+    }
+    public void gaussBlur(GAUSSIANBController contr){
+        double val=  contr.getSlider().getValue();
+        System.out.println(val);
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        GBlur g=new GBlur();
+        g.apply(img,val);
+
+    }
+    public void motionBlur(MOTIONBController contr){
+        double radius=  contr.getRadiusSlider().getValue();
+        double angle=contr.getAngleSlider().getValue();
+        //System.out.println(val);
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        MBlur m=new MBlur();
+        m.apply(img,radius,angle);
+
+    }
+
+    @FXML
+    void GaussianBlurOnAction(ActionEvent event) {
+        initNewController(gaussContr, "src\\main\\java\\Presentation\\FXMLfiles\\GaussianBlur.fxml","GaussianBlur");
+    }
+
+    @FXML
+    void MotionBlurOnAction(ActionEvent event) {
+        initNewController(motionContr, "src\\main\\java\\Presentation\\FXMLfiles\\MotionBlur.fxml", "MotionBlur");
     }
 
 }

@@ -57,11 +57,13 @@
             <MenuItem mnemonicParsing="false" onAction="#HueOnAction" text="Hue" />
             </items>
         </Menu>
-      <Menu mnemonicParsing="false" text="Filter">
+      <Menu mnemonicParsing="false" text="Effect">
          <items>
             <Menu mnemonicParsing="false" text="Blur">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#BoxBlurOnAction" text="BoxBlur" />
+                  <MenuItem mnemonicParsing="false" onAction="#GaussianBlurOnAction" text="GaussianBlur" />
+                  <MenuItem mnemonicParsing="false" onAction="#MotionBlurOnAction" text="MotionBlur" />
               </items>
             </Menu>
          </items>
