@@ -18,4 +18,9 @@ public class MBlur implements Effect {
         m.setRadius(val1);
         source.setEffect(m);
     }
+
+    @Override
+    public void apply(ImageView img, double val1, double val2, double val3, double val4) {
+
+    }
 }

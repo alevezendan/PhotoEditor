@@ -5,10 +5,8 @@ import Business.ColorParameters.Brightness;
 import Business.ColorParameters.Contrast;
 import Business.ColorParameters.Hue;
 import Business.ColorParameters.Saturation;
-import Business.Effects.BBlur;
+import Business.Effects.*;
 
-import Business.Effects.GBlur;
-import Business.Effects.MBlur;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
@@ -50,6 +48,10 @@ public class GUIController {
     GAUSSIANBController gaussContr;
     @FXML
     MOTIONBController motionContr;
+    @FXML REFLController reflContr;
+    @FXML BLOOMController bloomContr;
+    @FXML GLOWController glowContr;
+    @FXML SEPIAController sepiaContr;
     @FXML
     private ImageView imageView;
     @FXML
@@ -159,18 +161,18 @@ public class GUIController {
 
     @FXML
     void FlipHorizontalBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         FlipHorizontal flipH=new FlipHorizontal();
-        flipH.apply(img);
+        flipH.apply(getImage());
 
     }
 
     @FXML
     void FlipVerticalBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        ///ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         //img.scaleXProperty().set(-1.0);
         FlipVertical flip=new FlipVertical();
-        flip.apply(img);
+        flip.apply(getImage());
     }
 
     @FXML
@@ -189,61 +191,61 @@ public class GUIController {
 
     public void inflateB(BRIGHTController contr){
        double val=contr.getBrightSlider().getValue();
-       ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
        Brightness b=new Brightness();
-       b.apply(img,val);
+       b.apply(getImage(),val);
 
     }
 
     public void inflateS(SATURATIONController contr){
         double val=contr.getSlider().getValue();
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Saturation s=new Saturation();
-        s.apply(img,val);
+        s.apply(getImage(),val);
     }
 
     public void inflateC(CONTRASTController contr){
         double val=contr.getSlider().getValue();
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Contrast c=new Contrast();
-        c.apply(img,val);
+        c.apply(getImage(),val);
 
     }
     public void inflateH(HUEController contr){
         double val=contr.getSlider().getValue();
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Hue h=new Hue();
-        h.apply(img,val);
+        h.apply(getImage(),val);
     }
 
 
     @FXML
     void RotateLeftBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         RotateCounterclockwise rotL=new RotateCounterclockwise();
-        rotL.apply(img);
+        rotL.apply(getImage());
     }
 
 
    @FXML
     void RotateRightBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
        RotateClockwise rotR=new RotateClockwise();
-       rotR.apply(img);
+       rotR.apply(getImage());
     }
 
     @FXML
     void ZoomInBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         ZoomIn zoomIn=new ZoomIn();
-        zoomIn.apply(img);
+        zoomIn.apply(getImage());
     }
 
     @FXML
     void ZoomOutBtnAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         ZoomOut zoomOut=new ZoomOut();
-        zoomOut.apply(img);
+        zoomOut.apply(getImage());
     }
 
     public void initNewController(Controller c,String path,String title){
@@ -295,29 +297,61 @@ public class GUIController {
     public void boxBlur(BOXBLURController contr){
         double val=  contr.getSlider().getValue();
         System.out.println(val);
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         BBlur b= new BBlur();
-        b.apply(img,val);
+        b.apply(getImage(),val);
 
     }
     public void gaussBlur(GAUSSIANBController contr){
         double val=  contr.getSlider().getValue();
         System.out.println(val);
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         GBlur g=new GBlur();
-        g.apply(img,val);
+        g.apply(getImage(),val);
+    }
 
+    public void refl(REFLController contr){
+        double val1=  contr.getBottOpSlider().getValue();
+        double val2=contr.getTopOpSlider().getValue();
+        double val3=contr.getTopOffSlider().getValue();
+        double val4=contr.getFrSlider().getValue();
+      //  ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Reflectionn r=new Reflectionn();
+        r.apply(getImage(),val1,val2,val3,val4);
+    }
+
+    public ImageView getImage(){
+        return (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
     }
     public void motionBlur(MOTIONBController contr){
         double radius=  contr.getRadiusSlider().getValue();
         double angle=contr.getAngleSlider().getValue();
-        //System.out.println(val);
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        //ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         MBlur m=new MBlur();
-        m.apply(img,radius,angle);
-
+        m.apply(getImage(),radius,angle);
+    }
+    public void bloom(BLOOMController contr){
+        double thrashold=  contr.getThresholdSlider().getValue();
+        Bloomm b=new Bloomm();
+        b.apply(getImage(),thrashold);
     }
 
+    public void glow(GLOWController contr){
+        double level=  contr.getSlider().getValue();
+       Gloww g=new Gloww();
+        g.apply(getImage(),level);
+    }
+
+    public void sepia(SEPIAController contr){
+        double level=  contr.getSlider().getValue();
+        Sepia s=new Sepia();
+        s.apply(getImage(),level);
+    }
+
+    @FXML
+    void BloomOnAction(ActionEvent event) {
+        initNewController(bloomContr,"src\\main\\java\\Presentation\\FXMLfiles\\Bloom.fxml","Bloom");
+    }
     @FXML
     void GaussianBlurOnAction(ActionEvent event) {
         initNewController(gaussContr, "src\\main\\java\\Presentation\\FXMLfiles\\GaussianBlur.fxml","GaussianBlur");
@@ -328,4 +362,19 @@ public class GUIController {
         initNewController(motionContr, "src\\main\\java\\Presentation\\FXMLfiles\\MotionBlur.fxml", "MotionBlur");
     }
 
+    @FXML
+    void ReflectionOnAction(ActionEvent event) {
+            initNewController(reflContr,"src\\main\\java\\Presentation\\FXMLfiles\\Reflection.fxml","Reflection");
+    }
+
+
+    @FXML
+    void GlowOnAction(ActionEvent event) {
+        initNewController(glowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Glow.fxml","Glow");
+    }
+
+    @FXML
+    void SepiaOnAction(ActionEvent event) {
+        initNewController(sepiaContr,"src\\main\\java\\Presentation\\FXMLfiles\\Sepia.fxml","Sepia Tone");
+    }
 }

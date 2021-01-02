@@ -17,4 +17,9 @@ public class GBlur implements Effect {
     public void apply(ImageView source, double val1, double val2) {
 
     }
+
+    @Override
+    public void apply(ImageView img, double val1, double val2, double val3, double val4) {
+
+    }
 }

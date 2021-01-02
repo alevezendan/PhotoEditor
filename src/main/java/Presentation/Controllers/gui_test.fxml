@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.GUIController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.Controllers.GUIController">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#NewImageBtnAction" text="New" />
@@ -67,9 +67,6 @@
               </items>
             </Menu>
             <MenuItem mnemonicParsing="false" onAction="#ReflectionOnAction" text="Reflection" />
-            <MenuItem mnemonicParsing="false" onAction="#BloomOnAction" text="Bloom" />
-            <MenuItem mnemonicParsing="false" onAction="#GlowOnAction" text="Glow" />
-            <MenuItem mnemonicParsing="false" onAction="#SepiaOnAction" text="SepiaTone" />
          </items>
       </Menu>
     </MenuBar>
