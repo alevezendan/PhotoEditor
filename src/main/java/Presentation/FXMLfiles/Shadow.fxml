@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.SHADOWController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button layoutX="74.0" layoutY="161.0" mnemonicParsing="false" onAction="#ApplyOnAction" text="Apply" />
+            <Label layoutX="14.0" layoutY="14.0" text="Effect">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="49.0" text="Shadow">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Separator layoutY="39.0" prefWidth="200.0" />
+            <Separator layoutY="77.0" prefWidth="200.0" />
+            <Slider fx:id="slider" layoutX="28.0" layoutY="107.0" majorTickUnit="20.0" minorTickCount="6" onDragDetected="#slide" prefHeight="14.0" prefWidth="158.0" showTickLabels="true" showTickMarks="true" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -13,15 +13,24 @@ import Business.PhotoEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,10 +61,19 @@ public class GUIController {
     @FXML BLOOMController bloomContr;
     @FXML GLOWController glowContr;
     @FXML SEPIAController sepiaContr;
+    @FXML SHADOWController shadowContr;
+    @FXML
+    private ColorPicker cpFillColor;
     @FXML
     private ImageView imageView;
     @FXML
    private TabPane TabPanee;
+    @FXML
+    private CheckBox filled;
+    public double posX1,posY1,posX2,posY2;
+    public int cnt=1;
+    @FXML
+    private ColorPicker cpBorderColor;
 
     public TabPane getTabPanee() {
         return TabPanee;
@@ -92,18 +110,35 @@ public class GUIController {
         view.setFitWidth(240);
         Tab tab1=new Tab();
         tab1.setText("NewImage");
-        tab1.setContent(view);
+        Canvas c=new Canvas(300,300);
+        //tab1.setContent(view);
+        GraphicsContext gc = c.getGraphicsContext2D();
+        gc.drawImage(view.getImage(), 0, 0, c.getWidth(), c.getHeight());
+        tab1.setContent(c);
+        //tab1.setContent(view);
         tab1.closableProperty();
         tab1.setClosable(true);
         TabPanee.getTabs().add(tab1);
         photoEditor.loadImage(selectedFile.getAbsolutePath());
     }
 
+    @FXML
+    void clicked(MouseEvent event) {
+        if (cnt % 2 == 1) {
+            posX1 = event.getX();
+            posY1 = event.getY();
+        } else{
+            posX2 = event.getX();
+            posY2 = event.getY();
+         }
+       // System.out.println(posX+" "+posY);
+        cnt++;
+    }
 
     @FXML
     void NewImageBtnAction(ActionEvent event) {
 
-        double red=1;
+       /* double red=1;
         double green=1;
         double blue=1;
         double opacity=1;
@@ -132,7 +167,34 @@ public class GUIController {
         Tab tab1=new Tab();
         tab1.setText("Blank Image");
         tab1.setContent(imageView);
-        TabPanee.getTabs().add(tab1);
+        TabPanee.getTabs().add(tab1);*/
+
+        Canvas canvas = new Canvas();
+
+        // set height and width
+        canvas.setHeight(400);
+        canvas.setWidth(400);
+
+        // graphics context
+        GraphicsContext graphics_context =
+                canvas.getGraphicsContext2D();
+
+        // set fill for rectangle
+       /* graphics_context.setFill(Color.PINK);
+        graphics_context.fillRect(40, 40, 100, 100);
+
+        // set fill for rectangle
+        graphics_context.setFill(Color.RED);
+        graphics_context.fillRect(20, 20, 70, 70);
+
+        // set fill for oval
+        graphics_context.setFill(Color.BLUE);
+        graphics_context.fillOval(30, 30, 70, 70);*/
+
+        Tab tab=new Tab();
+        tab.setContent(canvas);
+        tab.setText("BlankTab");
+        TabPanee.getTabs().add(tab);
 
     }
 
@@ -149,14 +211,15 @@ public class GUIController {
 
     @FXML
     void DuplicateAction(ActionEvent event) {
-        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        ImageView img1=img;
+       // ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // ImageView img1=img;
+        Node n=TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Tab t=new Tab();
         t.setText(TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getText()+"Copy");
-        t.setContent(img);
+        t.setContent(n);
         TabPanee.getTabs().add(t);
-        Tab current=TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex());
-        current.setContent(img1);
+       // Tab current=TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex());
+       // current.setContent(n);
     }
 
     @FXML
@@ -348,6 +411,12 @@ public class GUIController {
         s.apply(getImage(),level);
     }
 
+    public void shadow(SHADOWController contr){
+        double level=  contr.getSlider().getValue();
+        Shadow s=new Shadow();
+        s.apply(getImage(),level);
+    }
+
     @FXML
     void BloomOnAction(ActionEvent event) {
         initNewController(bloomContr,"src\\main\\java\\Presentation\\FXMLfiles\\Bloom.fxml","Bloom");
@@ -377,4 +446,61 @@ public class GUIController {
     void SepiaOnAction(ActionEvent event) {
         initNewController(sepiaContr,"src\\main\\java\\Presentation\\FXMLfiles\\Sepia.fxml","Sepia Tone");
     }
+
+
+    @FXML
+    void ShadowOnAction(ActionEvent event) {
+        initNewController(shadowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Shadow.fxml","Shadow");
+    }
+
+    @FXML
+    void RectOnAction(ActionEvent event) {
+        //Rectangle rect=new Rectangle(10,10,200,200);
+        //rect.setFill(Color.BLUE);
+        //GraphicsContext graphics_context =
+        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        GraphicsContext graphics_context =c.getGraphicsContext2D();
+
+        // set fill for rectangle
+        graphics_context.setFill(cpFillColor.getValue());
+        graphics_context.fillRect(40, 40, 100, 50);
+
+    }
+    @FXML
+    void CircleOnAction(ActionEvent event) {
+
+        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        GraphicsContext graphics_context =c.getGraphicsContext2D();
+        graphics_context.setFill(cpFillColor.getValue());
+        graphics_context.setStroke(cpFillColor.getValue());
+        if(filled.isSelected()){
+            graphics_context.setFill(cpFillColor.getValue());
+            graphics_context.setStroke(cpBorderColor.getValue());
+            graphics_context.fillOval(50, 50, 50, 50);
+
+        }
+        else
+        {
+            graphics_context.setStroke(cpFillColor.getValue());
+            graphics_context.strokeOval(10, 10, 50, 50);
+        }
+
+
+
+    }
+    @FXML
+    void LineOnAction(ActionEvent event) {
+
+        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        GraphicsContext graphics_context =c.getGraphicsContext2D();
+        //graphics_context.setFill(cpFillColor.getValue());
+        graphics_context.setStroke(cpFillColor.getValue());
+        graphics_context.strokeLine(posX1,posY1,posX2,posY2);
+
+    }
+    @FXML
+    void fill(ActionEvent event) {
+
+    }
+
 }
