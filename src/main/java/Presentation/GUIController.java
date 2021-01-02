@@ -10,6 +10,8 @@ import Business.Effects.*;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
+import Business.Shapes.Circle;
+import Business.Shapes.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,15 +20,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -72,6 +71,8 @@ public class GUIController {
     private CheckBox filled;
     public double posX1,posY1,posX2,posY2;
     public int cnt=1;
+    @FXML
+    private Slider sldBorderSize;
     @FXML
     private ColorPicker cpBorderColor;
 
@@ -459,42 +460,26 @@ public class GUIController {
         //rect.setFill(Color.BLUE);
         //GraphicsContext graphics_context =
         Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        GraphicsContext graphics_context =c.getGraphicsContext2D();
-
-        // set fill for rectangle
-        graphics_context.setFill(cpFillColor.getValue());
-        graphics_context.fillRect(40, 40, 100, 50);
+        Rectangle r=new Rectangle();
+        r.draw(c,cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
 
     }
     @FXML
     void CircleOnAction(ActionEvent event) {
 
         Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        GraphicsContext graphics_context =c.getGraphicsContext2D();
-        graphics_context.setFill(cpFillColor.getValue());
-        graphics_context.setStroke(cpFillColor.getValue());
-        if(filled.isSelected()){
-            graphics_context.setFill(cpFillColor.getValue());
-            graphics_context.setStroke(cpBorderColor.getValue());
-            graphics_context.fillOval(50, 50, 50, 50);
-
-        }
-        else
-        {
-            graphics_context.setStroke(cpFillColor.getValue());
-            graphics_context.strokeOval(10, 10, 50, 50);
-        }
+        Circle ci=new Circle();
+        ci.draw(c,cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
 
 
 
     }
     @FXML
     void LineOnAction(ActionEvent event) {
-
         Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         GraphicsContext graphics_context =c.getGraphicsContext2D();
-        //graphics_context.setFill(cpFillColor.getValue());
         graphics_context.setStroke(cpFillColor.getValue());
+        graphics_context.setLineWidth(sldBorderSize.getValue());
         graphics_context.strokeLine(posX1,posY1,posX2,posY2);
 
     }
