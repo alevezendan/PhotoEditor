@@ -1,6 +1,5 @@
 package Presentation;
 
-import Business.ColorParameters.Brightness;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
@@ -8,9 +7,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
-import javafx.scene.input.TouchEvent;
 
-public class BRIGHTController {
+public class BRIGHTController extends  Controller{
 
     private GUIController gui;
 

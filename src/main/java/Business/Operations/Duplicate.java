@@ -1,8 +1,6 @@
 package Business.Operations;
 
 import Business.Operation;
-import Presentation.GUIController;
-import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 
 public class Duplicate implements Operation {

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
-public class HUEController {
+public class HUEController extends Controller{
 
     private GUIController gui;
 

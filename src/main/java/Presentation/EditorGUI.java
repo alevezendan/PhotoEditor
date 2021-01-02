@@ -28,6 +28,7 @@ public class EditorGUI extends Application {
             fxmlStream = new FileInputStream(fxmlDocPath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Error");
         }
 
         // Create the Pane and all Details
@@ -36,6 +37,7 @@ public class EditorGUI extends Application {
             root = (VBox) loader.load(fxmlStream);
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error");
         }
 
          scene = new Scene(root);

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
-public class CONTRASTController {
+public class CONTRASTController extends  Controller{
 
     private GUIController gui;
 

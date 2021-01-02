@@ -5,20 +5,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
-public class SATURATIONController extends  Controller{
+public class BOXBLURController extends Controller{
 
-    private GUIController gui;
+   // private GUIController gui;
+    @FXML
+    private Slider slider;
 
     public Slider getSlider() {
         return slider;
     }
 
     @FXML
-    private Slider slider;
-
-    @FXML
     void ApplyBtnAction(ActionEvent event) {
-        gui.inflateS(this);
+        gui.boxBlur(this);
     }
 
     @FXML
@@ -27,6 +26,7 @@ public class SATURATIONController extends  Controller{
     }
 
     public void init(GUIController mainGui) {
+
         this.gui=mainGui;
     }
 }

@@ -3,10 +3,9 @@ package Presentation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 
 
-public class RESIZEController {
+public class RESIZEController extends  Controller{
 
     private GUIController gui;
     @FXML

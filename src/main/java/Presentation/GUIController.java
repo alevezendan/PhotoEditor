@@ -5,13 +5,13 @@ import Business.ColorParameters.Brightness;
 import Business.ColorParameters.Contrast;
 import Business.ColorParameters.Hue;
 import Business.ColorParameters.Saturation;
+import Business.Filters.Blur;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
+import Presentation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,33 +19,31 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.effect.ColorAdjust;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
-import java.util.ResourceBundle;
 
 
 public class GUIController {
     private IPhotoEditor photoEditor;
 
-    @FXML RESIZEController resContr;
-    @FXML BRIGHTController brightContr;
-    @FXML SATURATIONController saturContr;
-    @FXML CONTRASTController contrContr;
-    @FXML HUEController hueContr;
+    @FXML
+    RESIZEController resContr;
+    @FXML
+    BRIGHTController brightContr;
+    @FXML
+    SATURATIONController saturContr;
+    @FXML
+    CONTRASTController contrContr;
+    @FXML
+    HUEController hueContr;
+    @FXML
+    BOXBLURController boxContr;
     @FXML
     private ImageView imageView;
     @FXML
@@ -66,20 +64,11 @@ public class GUIController {
 
     }
 
-public Double getWContr2(){
-        return Double.parseDouble(resContr.getW().getText());
-}
-
-public Double getHContr2(){
-        return  Double.parseDouble(resContr.getH().getText());
-}
-
-
     public void OpenImageBtnAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files", "*.png"));
-    Image image=null;
+         Image image=null;
         try {
             System.out.println("Showing image " + selectedFile.getName());
             FileInputStream stream = new FileInputStream(selectedFile.getAbsolutePath());
@@ -91,18 +80,14 @@ public Double getHContr2(){
         }
 
         ImageView view=new ImageView(image);
-       view.setFitHeight(350);
+        view.setFitHeight(350);
         view.setFitWidth(240);
         Tab tab1=new Tab();
         tab1.setText("NewImage");
         tab1.setContent(view);
         tab1.closableProperty();
         tab1.setClosable(true);
-
-
         TabPanee.getTabs().add(tab1);
-
-
         photoEditor.loadImage(selectedFile.getAbsolutePath());
     }
 
@@ -143,12 +128,6 @@ public Double getHContr2(){
 
     }
 
-   /* @FXML
-    void MirrorBtnAction(ActionEvent event) {
-       ImageView img=(ImageView)TabPanee.getTabs().get(0).getContent();
-       Image i=img.getImage();
-       BufferedImage bImage = SwingFXUtils.fromFXImage(i, null);
-    }*/
    @FXML
    void CropBtnAction(ActionEvent event) {
        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
@@ -190,45 +169,23 @@ public Double getHContr2(){
 
     @FXML
     void ResizeBtnAction(ActionEvent event) {
-        try{
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
-            FXMLLoader loader=new FXMLLoader();
-        // Path to the FXML File
-            String fxmlDocPath = "src\\main\\java\\Presentation\\Resize.fxml";
-             FileInputStream fxmlStream = null;
-             fxmlStream = new FileInputStream(fxmlDocPath);
-             Parent parent=loader.load(fxmlStream);
-             resContr= loader.getController();
-             Stage stage =new Stage();
-             stage.setTitle("Resize Image");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            resContr.init(this);
-
-        } catch(IOException e){
-                 System.out.println("eferg");
-        }
+        initNewController(resContr,"src\\main\\java\\Presentation\\Resize.fxml","Resize");
     }
 
     public void inflate(RESIZEController contr){
-       double W=getWContr2();
-       double H=getHContr2();
        int i=TabPanee.getSelectionModel().getSelectedIndex();
        ImageView img= (ImageView) TabPanee.getTabs().get(i).getContent();
        Resize res=new Resize();
        res.apply(img);
-       img.setFitWidth(W);
-       img.setFitHeight(H);
-       //TabPanee.getTabs().get(i).setContent(img);
-
-
+       img.setFitWidth(Double.parseDouble(contr.getW().getText()));
+       img.setFitHeight(Double.parseDouble(contr.getH().getText()));
     }
 
     public void inflateB(BRIGHTController contr){
-      double val=contr.getBrightSlider().getValue();
+       double val=contr.getBrightSlider().getValue();
        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        Brightness b=new Brightness();
-        b.apply(img,val);
+       Brightness b=new Brightness();
+       b.apply(img,val);
 
     }
 
@@ -237,7 +194,6 @@ public Double getHContr2(){
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Saturation s=new Saturation();
         s.apply(img,val);
-
     }
 
     public void inflateC(CONTRASTController contr){
@@ -252,7 +208,6 @@ public Double getHContr2(){
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Hue h=new Hue();
         h.apply(img,val);
-
     }
 
 
@@ -276,8 +231,6 @@ public Double getHContr2(){
         ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         ZoomIn zoomIn=new ZoomIn();
         zoomIn.apply(img);
-
-
     }
 
     @FXML
@@ -287,96 +240,59 @@ public Double getHContr2(){
         zoomOut.apply(img);
     }
 
-
-    @FXML
-    void BrightnessOnAction(ActionEvent event) {
+    public void initNewController(Controller c,String path,String title){
         try{
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
             FXMLLoader loader=new FXMLLoader();
-            // Path to the FXML File
-            String fxmlDocPath = "src\\main\\java\\Presentation\\Brightness.fxml";
             FileInputStream fxmlStream = null;
-            fxmlStream = new FileInputStream(fxmlDocPath);
+            fxmlStream = new FileInputStream(path);
             Parent parent=loader.load(fxmlStream);
-            brightContr=loader.getController();
+            c=loader.getController();
             Stage stage =new Stage();
-            stage.setTitle("Brightness");
+            stage.setTitle(title);
             stage.setScene(new Scene(parent));
             stage.show();
-           brightContr.init(this);
+            c.init(this);
 
         } catch(IOException e){
             System.out.println("eferg");
         }
+    }
+
+    @FXML
+    void BrightnessOnAction(ActionEvent event) {
+        initNewController(brightContr,"src\\main\\java\\Presentation\\Brightness.fxml","Brightness");
 
     }
 
 
     @FXML
     void SaturationOnAction(ActionEvent event) {
-        try{
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
-            FXMLLoader loader=new FXMLLoader();
-            // Path to the FXML File
-            String fxmlDocPath = "src\\main\\java\\Presentation\\Saturation.fxml";
-            FileInputStream fxmlStream = null;
-            fxmlStream = new FileInputStream(fxmlDocPath);
-            Parent parent=loader.load(fxmlStream);
-            saturContr=loader.getController();
-            Stage stage =new Stage();
-            stage.setTitle("Saturation");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            saturContr.init(this);
-
-        } catch(IOException e){
-            System.out.println("eferg");
-        }
+        initNewController(saturContr,"src\\main\\java\\Presentation\\Saturation.fxml","Sturation");
     }
 
     @FXML
     void ContrastOnAction(ActionEvent event) {
-        try{
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
-            FXMLLoader loader=new FXMLLoader();
-            // Path to the FXML File
-            String fxmlDocPath = "src\\main\\java\\Presentation\\Contrast.fxml";
-            FileInputStream fxmlStream = null;
-            fxmlStream = new FileInputStream(fxmlDocPath);
-            Parent parent=loader.load(fxmlStream);
-            contrContr=loader.getController();
-            Stage stage =new Stage();
-            stage.setTitle("Saturation");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            contrContr.init(this);
-
-        } catch(IOException e){
-            System.out.println("eferg");
-        }
+        initNewController(contrContr,"src\\main\\java\\Presentation\\Contrast.fxml","Contrast");
     }
 
     @FXML
     void HueOnAction(ActionEvent event) {
-        try{
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("Resize.fxml"));
-            FXMLLoader loader=new FXMLLoader();
-            // Path to the FXML File
-            String fxmlDocPath = "src\\main\\java\\Presentation\\Hue.fxml";
-            FileInputStream fxmlStream = null;
-            fxmlStream = new FileInputStream(fxmlDocPath);
-            Parent parent=loader.load(fxmlStream);
-            hueContr=loader.getController();
-            Stage stage =new Stage();
-            stage.setTitle("Saturation");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            hueContr.init(this);
-
-        } catch(IOException e){
-            System.out.println("eferg");
-        }
+        initNewController(hueContr,"src\\main\\java\\Presentation\\Hue.fxml","Hue");
     }
 
+
+    @FXML
+    void BoxBlurOnAction(ActionEvent event) {
+        initNewController(boxContr,"src\\main\\java\\Presentation\\BoxBlur.fxml","BoxBlur");
+    }
+
+    public void boxBlur(BOXBLURController contr){
+        double val=  contr.getSlider().getValue();
+        System.out.println(val);
+        ImageView img= (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        Blur b=new Blur();
+        b.apply(img,val);
+
+    }
 
 }
