@@ -25,7 +25,7 @@ public class Circle implements Shape {
         else
         {
             graphics_context.setStroke(fillColor);
-            graphics_context.strokeOval(10, 10, 50, 50);
+            graphics_context.strokeOval(x1,y1,abs(x2-x1),abs(x2-x1));
         }
     }
 }

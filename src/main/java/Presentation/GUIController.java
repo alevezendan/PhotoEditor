@@ -11,13 +11,17 @@ import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
 import Business.Shapes.Circle;
+import Business.Shapes.Line;
 import Business.Shapes.Rectangle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -25,7 +29,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -75,7 +78,13 @@ public class GUIController {
     private Slider sldBorderSize;
     @FXML
     private ColorPicker cpBorderColor;
-
+    @FXML
+    private ColorPicker bgColor;
+    @FXML
+    private CheckBox bg;
+    @FXML
+    private ComboBox<String> comboShapes;
+    private ObservableList<String> dbTypeList = FXCollections.observableArrayList("Rectangle","Circle","Line");
     public TabPane getTabPanee() {
         return TabPanee;
     }
@@ -88,6 +97,7 @@ public class GUIController {
         System.out.println("Initialized");
         imageView = new ImageView();
         photoEditor = new PhotoEditor();
+        comboShapes.setItems(dbTypeList);
 
     }
 
@@ -111,12 +121,15 @@ public class GUIController {
         view.setFitWidth(240);
         Tab tab1=new Tab();
         tab1.setText("NewImage");
-        Canvas c=new Canvas(300,300);
+        //Canvas c=new Canvas(300,300);
+       //WritableImage img= c.snapshot(new SnapshotParameters(),new WritableImage(300,300));
+
         //tab1.setContent(view);
-        GraphicsContext gc = c.getGraphicsContext2D();
-        gc.drawImage(view.getImage(), 0, 0, c.getWidth(), c.getHeight());
-        tab1.setContent(c);
-        //tab1.setContent(view);
+        //GraphicsContext gc = c.getGraphicsContext2D();
+
+        //gc.drawImage(view.getImage(), 0, 0, c.getWidth(), c.getHeight());
+        //tab1.setContent(c);
+        tab1.setContent(view);
         tab1.closableProperty();
         tab1.setClosable(true);
         TabPanee.getTabs().add(tab1);
@@ -125,14 +138,30 @@ public class GUIController {
 
     @FXML
     void clicked(MouseEvent event) {
+        MouseEvent event2;
         if (cnt % 2 == 1) {
             posX1 = event.getX();
-            posY1 = event.getY();
+            posY1 = event.getY()-30;
+            System.out.println(posX1+" "+posY1);
         } else{
             posX2 = event.getX();
-            posY2 = event.getY();
+            posY2 = event.getY()-30;
+            System.out.println(posX2+" "+posY2);
          }
        // System.out.println(posX+" "+posY);
+
+        if(comboShapes.getValue().equals("Rectangle") && cnt%2==0){
+            Rectangle r=new Rectangle();
+            r.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
+        }else{
+        if(comboShapes.getValue().equals("Circle") && cnt%2==0){
+           Circle c=new Circle();
+            c.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
+        }else{
+        if(comboShapes.getValue().equals("Line") && cnt%2==0){
+            Line l=new Line();
+            l.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
+        }}}
         cnt++;
     }
 
@@ -453,39 +482,51 @@ public class GUIController {
     void ShadowOnAction(ActionEvent event) {
         initNewController(shadowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Shadow.fxml","Shadow");
     }
-
-    @FXML
-    void RectOnAction(ActionEvent event) {
+    public Canvas getCanvas(){
+        return (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+    }
+   //@FXML
+   /* void RectOnAction(ActionEvent event) {
         //Rectangle rect=new Rectangle(10,10,200,200);
         //rect.setFill(Color.BLUE);
         //GraphicsContext graphics_context =
-        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+
         Rectangle r=new Rectangle();
-        r.draw(c,cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
+        r.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
 
     }
     @FXML
     void CircleOnAction(ActionEvent event) {
-
-        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         Circle ci=new Circle();
-        ci.draw(c,cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-
-
+        ci.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
 
     }
     @FXML
     void LineOnAction(ActionEvent event) {
-        Canvas c= (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
-        GraphicsContext graphics_context =c.getGraphicsContext2D();
-        graphics_context.setStroke(cpFillColor.getValue());
-        graphics_context.setLineWidth(sldBorderSize.getValue());
-        graphics_context.strokeLine(posX1,posY1,posX2,posY2);
+        Line l=new Line();
+        l.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
 
-    }
+    }*/
     @FXML
     void fill(ActionEvent event) {
 
     }
+
+    @FXML
+    void BackgroundOnAction(MouseEvent event){
+        if(bg.isSelected()){
+            Rectangle r=new Rectangle();
+            r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
+        }
+    }
+
+    @FXML
+    void changeBackground(ActionEvent event) {
+        if(bg.isSelected()){
+            Rectangle r=new Rectangle();
+            r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
+        }
+    }
+
 
 }

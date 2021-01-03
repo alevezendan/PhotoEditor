@@ -13,13 +13,15 @@ public class Rectangle implements Shape {
         if(filled) {
             graphics_context.setFill(fillColor);
             graphics_context.setStroke(borderColor);
+            graphics_context.setLineWidth(widthSize);
             // graphics_context.fillRect(40, 40, 100, 50);
             graphics_context.fillRect(x1,y1,x2-x1,y2-y1);
         }
         else
         {
             graphics_context.setStroke(borderColor);
-            graphics_context.strokeRect(x1,y1,x2,y2);
+            graphics_context.setLineWidth(widthSize);
+            graphics_context.strokeRect(x1,y1,x2-x1,y2-y1);
         }
     }
 }
