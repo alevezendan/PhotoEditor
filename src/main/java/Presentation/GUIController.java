@@ -13,6 +13,7 @@ import Business.PhotoEditor;
 import Business.Shapes.Circle;
 import Business.Shapes.Line;
 import Business.Shapes.Rectangle;
+import Business.Shapes.Text;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,10 +26,14 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -38,6 +43,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class GUIController {
@@ -72,6 +78,17 @@ public class GUIController {
    private TabPane TabPanee;
     @FXML
     private CheckBox filled;
+    @FXML
+    private TextField tfTextString;
+
+    @FXML
+    private TextField tfFontSize;
+
+    @FXML
+    private ColorPicker cpTextColor;
+
+    @FXML
+    private ComboBox<String> cbbFontStyle;
     public double posX1,posY1,posX2,posY2;
     public int cnt=1;
     @FXML
@@ -84,12 +101,11 @@ public class GUIController {
     private CheckBox bg;
     @FXML
     private ComboBox<String> comboShapes;
+   // private ObservableList<String> fonts= (ObservableList<String>) javafx.scene.text.Font.getFamilies();
     private ObservableList<String> dbTypeList = FXCollections.observableArrayList("Rectangle","Circle","Line");
     public TabPane getTabPanee() {
         return TabPanee;
     }
-
-
 
     @FXML
     private void initialize()
@@ -98,6 +114,9 @@ public class GUIController {
         imageView = new ImageView();
         photoEditor = new PhotoEditor();
         comboShapes.setItems(dbTypeList);
+      //  cbbFontStyle.setItems(fonts);
+        cbbFontStyle.getItems().addAll(Font.getFontNames());
+        cbbFontStyle.setValue("Roboto");
 
     }
 
@@ -121,15 +140,24 @@ public class GUIController {
         view.setFitWidth(240);
         Tab tab1=new Tab();
         tab1.setText("NewImage");
-        //Canvas c=new Canvas(300,300);
+        Canvas c=new Canvas(300,300);
+        javafx.scene.shape.Rectangle r=new javafx.scene.shape.Rectangle(posX1,posY1,c.getWidth(),c.getHeight());
+        r.setFill(new ImagePattern(image));
+
+        //Rectangle r=new Rectangle();
+       // r.draw(c,new ImagePattern(image),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),0,30,c.getWidth(),c.getHeight());
        //WritableImage img= c.snapshot(new SnapshotParameters(),new WritableImage(300,300));
+        //Image i=getCanvas().snapshot(null,null);
+       // ImageView img=new ImageView();
+       // img.setImage(i);
 
         //tab1.setContent(view);
-        //GraphicsContext gc = c.getGraphicsContext2D();
+        GraphicsContext gc = c.getGraphicsContext2D();
 
-        //gc.drawImage(view.getImage(), 0, 0, c.getWidth(), c.getHeight());
-        //tab1.setContent(c);
-        tab1.setContent(view);
+        gc.drawImage(view.getImage(), 0, 0, c.getWidth(), c.getHeight());
+        tab1.setContent(c);
+
+       // tab1.setContent(view);
         tab1.closableProperty();
         tab1.setClosable(true);
         TabPanee.getTabs().add(tab1);
@@ -149,19 +177,28 @@ public class GUIController {
             System.out.println(posX2+" "+posY2);
          }
        // System.out.println(posX+" "+posY);
-
-        if(comboShapes.getValue().equals("Rectangle") && cnt%2==0){
-            Rectangle r=new Rectangle();
-            r.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-        }else{
-        if(comboShapes.getValue().equals("Circle") && cnt%2==0){
-           Circle c=new Circle();
-            c.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-        }else{
-        if(comboShapes.getValue().equals("Line") && cnt%2==0){
-            Line l=new Line();
-            l.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-        }}}
+        if(accordion.getExpandedPane().getText().equals("Drawing Tools")) {
+            if (comboShapes.getValue().equals("Rectangle") && cnt % 2 == 0) {
+                Rectangle r = new Rectangle();
+                r.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+            } else {
+                if (comboShapes.getValue().equals("Circle") && cnt % 2 == 0) {
+                    Circle c = new Circle();
+                    c.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+                } else {
+                    if (comboShapes.getValue().equals("Line") && cnt % 2 == 0) {
+                        Line l = new Line();
+                        l.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+                    }
+                }
+            }
+        }else
+        {
+            if(accordion.getExpandedPane().getText().equals("Text Tools")){
+                Text t=new Text();
+                t.setText(getCanvas(),tfTextString.getText(),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),posX1,posY1);
+            }
+        }
         cnt++;
     }
 
@@ -414,7 +451,12 @@ public class GUIController {
     }
 
     public ImageView getImage(){
-        return (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+       // return (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
+        SnapshotParameters param=new SnapshotParameters();
+        param.setFill(Color.TRANSPARENT);
+        ImageView img=new ImageView();
+        img.setImage(getCanvas().snapshot(param,null));
+        return img;
     }
     public void motionBlur(MOTIONBController contr){
         double radius=  contr.getRadiusSlider().getValue();
@@ -514,7 +556,7 @@ public class GUIController {
 
     @FXML
     void BackgroundOnAction(MouseEvent event){
-        if(bg.isSelected()){
+        if(bg.isSelected() && accordion.getExpandedPane().getText().equals("Drawing Tools")){
             Rectangle r=new Rectangle();
             r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
         }
@@ -522,11 +564,35 @@ public class GUIController {
 
     @FXML
     void changeBackground(ActionEvent event) {
-        if(bg.isSelected()){
+        if(bg.isSelected() && accordion.getExpandedPane().getText().equals("Drawing Tools")){
             Rectangle r=new Rectangle();
             r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
         }
+
     }
 
+    @FXML
+    void write(KeyEvent event) {
+        Text t=new Text();
+        t.setText(getCanvas(),tfTextString.getText(),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),posX1,posY1);
+
+        //System.out.println(accordion.getExpandedPane().getText());
+
+    }
+    int c=1;
+    @FXML
+    private Accordion accordion;
+    @FXML
+    void DeleteOnAction(ActionEvent event) {
+        tfTextString.setText( tfTextString.getText().substring(0, tfTextString.getText().length()-1));
+        Text t=new Text();
+        t.clear(getCanvas(),tfTextString.getText(),tfTextString.getText().substring(0, tfTextString.getText().length()-c),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),bgColor.getValue(),posX1,posY1);
+        if(tfTextString.getText().length()==0){
+            c=0;
+        }
+        else {
+            c++;
+        }
+    }
 
 }
