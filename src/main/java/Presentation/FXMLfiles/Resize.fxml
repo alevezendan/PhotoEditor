@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="250.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.RESIZEController">
+<AnchorPane prefHeight="199.0" prefWidth="249.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.RESIZEController">
    <children>
-      <Pane layoutX="-1.0" prefHeight="250.0" prefWidth="250.0">
+      <Pane layoutX="-1.0" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #c5b7c8; -fx-border-color: #896e8e; -fx-border-width: 5;">
          <children>
-            <Text fill="#b21313" layoutX="32.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NewWidth" wrappingWidth="70.552734375">
-               <font>
-                  <Font name="Century Gothic Bold" size="12.0" />
-               </font>
-            </Text>
-            <Text fill="#ba1313" layoutX="32.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NewHeight">
-               <font>
-                  <Font name="Century Gothic Bold" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="W" layoutX="125.0" layoutY="70.0" onAction="#Width" prefHeight="15.0" prefWidth="84.0"  />
-            <TextField  fx:id="H" layoutX="125.0" layoutY="131.0" onAction="#Height" prefHeight="15.0" prefWidth="84.0" />
-            <Button layoutX="93.0" layoutY="192.0" mnemonicParsing="false" onAction="#ApplyBtnAction" prefHeight="25.0" prefWidth="64.0" text="Apply" />
+            <TextField fx:id="W" layoutX="125.0" layoutY="49.0" onAction="#Width" prefHeight="15.0" prefWidth="84.0" />
+            <TextField fx:id="H" layoutX="125.0" layoutY="119.0" onAction="#Height" prefHeight="15.0" prefWidth="84.0" />
+            <Button layoutX="93.0" layoutY="186.0" mnemonicParsing="false" onAction="#ApplyBtnAction" prefHeight="25.0" prefWidth="64.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
+            <Label layoutX="41.0" layoutY="53.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="New Width" />
+            <Label layoutX="39.0" layoutY="122.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="New Height" />
          </children>
       </Pane>
    </children>

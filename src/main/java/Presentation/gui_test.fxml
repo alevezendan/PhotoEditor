@@ -262,7 +262,7 @@
                 <ImageView fx:id="imageView" fitHeight="10.0" fitWidth="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
             </children></Pane>
         <TabPane fx:id="TabPanee" layoutX="74.0" layoutY="14.0" onMouseClicked="#clicked" prefHeight="351.0" prefWidth="384.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/tab.css" tabClosingPolicy="ALL_TABS" />
-      <Pane fx:id="p2" layoutX="469.0" layoutY="10.0" prefHeight="366.0" prefWidth="170.0" stylesheets="@paneWhite.css">
+      <Pane fx:id="p2" layoutX="469.0" layoutY="10.0" prefHeight="366.0" prefWidth="170.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/paneWhite.css">
          <children>
             <Accordion fx:id="accordion" layoutY="9.0" prefHeight="267.0" prefWidth="170.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/acc.css">
                <panes>
@@ -389,7 +389,7 @@
                                            </HBox>
                                        </children>
                                    </VBox>
-                              <Button layoutX="59.0" layoutY="163.0" mnemonicParsing="false" onAction="#DeleteOnAction" stylesheets="@button1.css" text="Delete" />
+                              <Button layoutX="59.0" layoutY="163.0" mnemonicParsing="false" onAction="#DeleteOnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Delete" />
                                </children>
                            </AnchorPane>
                        </content>
@@ -400,7 +400,7 @@
                </panes>
             </Accordion>
             <ComboBox fx:id="cbLayer" layoutX="9.0" layoutY="315.0" onAction="#layer" prefHeight="25.0" prefWidth="156.0" promptText="Layers" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
-            <Button layoutX="56.0" layoutY="276.0" mnemonicParsing="false" onAction="#RemoveOnAction" prefHeight="28.0" prefWidth="59.0" stylesheets="@button1.css" text="Remove" />
+            <Button layoutX="56.0" layoutY="276.0" mnemonicParsing="false" onAction="#RemoveOnAction" prefHeight="28.0" prefWidth="59.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Remove" />
             <ComboBox editable="true" layoutX="10.0" layoutY="340.0" prefHeight="25.0" prefWidth="156.0" promptText="Brushes" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
          </children>
       </Pane>

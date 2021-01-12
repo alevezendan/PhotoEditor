@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Business.Controllers.BOXBLURController">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets=" file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/anchor.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Business.Controllers.BOXBLURController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #896e8e;">
          <children>
-            <Button layoutX="74.0" layoutY="148.0" mnemonicParsing="false" onAction="#ApplyBtnAction" text="Apply" />
-            <Label layoutX="14.0" layoutY="14.0" text="Filter" />
-            <Label layoutX="14.0" layoutY="53.0" text="BoxBlur">
+            <Button layoutX="74.0" layoutY="148.0" mnemonicParsing="false" onAction="#ApplyBtnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
+            <Label layoutX="80.0" layoutY="14.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Filter" />
+            <Label layoutX="74.0" layoutY="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="BoxBlur">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
             <Separator layoutY="39.0" prefWidth="200.0" />
             <Separator layoutY="77.0" prefWidth="200.0" />
-            <Slider fx:id="slider" layoutX="16.0" layoutY="100.0" majorTickUnit="1.0" max="3.0" minorTickCount="1" onDragDetected="#slide" prefHeight="14.0" prefWidth="164.0" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="slider" layoutX="16.0" layoutY="100.0" majorTickUnit="1.0" max="3.0" minorTickCount="1" onDragDetected="#slide" prefHeight="14.0" prefWidth="164.0" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
          </children>
       </Pane>
    </children>

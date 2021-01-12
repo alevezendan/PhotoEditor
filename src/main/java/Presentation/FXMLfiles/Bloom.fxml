@@ -8,26 +8,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.BLOOMController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c5b7c8; -fx-border-color: #896e8e; -fx-border-width: 5;">
          <children>
-            <Button layoutX="74.0" layoutY="155.0" mnemonicParsing="false" onAction="#ApplyOnAction" text="Apply" />
-            <Label layoutX="14.0" layoutY="23.0" text="Effect">
+            <Button layoutX="74.0" layoutY="155.0" mnemonicParsing="false" onAction="#ApplyOnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
+            <Label layoutX="78.0" layoutY="14.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Effect">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="55.0" text="Bloom">
+            <Label layoutX="76.0" layoutY="55.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Bloom">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Separator layoutY="40.0" prefWidth="200.0" />
-            <Separator layoutY="81.0" prefWidth="200.0" />
-            <Slider fx:id="thresholdSlider" layoutX="74.0" layoutY="105.0" majorTickUnit="0.5" max="1.0" minorTickCount="4" prefHeight="17.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" />
-            <Label layoutX="15.0" layoutY="105.0" text="Threshold" />
+            <Separator layoutX="7.0" layoutY="40.0" prefHeight="3.0" prefWidth="182.0" />
+            <Separator layoutX="7.0" layoutY="81.0" prefHeight="3.0" prefWidth="182.0" />
+            <Slider fx:id="thresholdSlider" layoutX="78.0" layoutY="103.0" majorTickUnit="0.5" max="1.0" minorTickCount="4" prefHeight="17.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
+            <Label layoutX="14.0" layoutY="104.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Threshold" />
          </children>
       </Pane>
    </children>

@@ -7,22 +7,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.GAUSSIANBController">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c5b7c8; -fx-border-color: #896e8e; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.GAUSSIANBController">
    <children>
-      <Button layoutX="71.0" layoutY="152.0" mnemonicParsing="false" onAction="#ApplyBtnAction" text="Apply" />
-      <Label layoutX="20.0" layoutY="14.0" text="Effects">
+      <Button layoutX="71.0" layoutY="152.0" mnemonicParsing="false" onAction="#ApplyBtnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
+      <Label layoutX="80.0" layoutY="14.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Effects">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="51.0" text="Gaussian Blur">
+      <Label layoutX="64.0" layoutY="51.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Gaussian Blur">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Label>
-      <Separator layoutY="38.0" prefWidth="200.0" />
-      <Separator layoutY="76.0" prefWidth="200.0" />
-      <Slider fx:id="slider" layoutX="8.0" layoutY="100.0" majorTickUnit="20.0" max="90.0" minorTickCount="5" onDragDetected="#slide" prefHeight="14.0" prefWidth="177.0" showTickLabels="true" showTickMarks="true" />
+      <Separator layoutX="7.0" layoutY="38.0" prefHeight="3.0" prefWidth="193.0" />
+      <Separator layoutX="6.0" layoutY="76.0" prefHeight="3.0" prefWidth="194.0" />
+      <Slider fx:id="slider" layoutX="17.0" layoutY="100.0" majorTickUnit="20.0" max="90.0" minorTickCount="5" onDragDetected="#slide" prefHeight="14.0" prefWidth="177.0" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
    </children>
 </AnchorPane>

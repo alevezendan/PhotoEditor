@@ -10,25 +10,25 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="269.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.REFLController">
    <children>
-      <Pane prefHeight="300.0" prefWidth="274.0">
+      <Pane prefHeight="300.0" prefWidth="274.0" style="-fx-border-color: #896e8e; -fx-border-width: 5; -fx-background-color: #c5b7c8;">
          <children>
-            <Button layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#ApplyOnAction" text="Apply" />
-            <Label layoutX="25.0" layoutY="14.0" text="Effect">
+            <Button layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#ApplyOnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
+            <Label layoutX="117.0" layoutY="14.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Effect">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="53.0" text="Reflection">
+            <Label layoutX="112.0" layoutY="51.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Reflection">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Separator layoutY="39.0" prefHeight="3.0" prefWidth="274.0" />
-            <Separator layoutY="79.0" prefHeight="3.0" prefWidth="274.0" />
-            <Slider fx:id="bottOpSlider" layoutX="106.0" layoutY="101.0" majorTickUnit="0.5" max="1.0" minorTickCount="4" onDragDetected="#bottOpSlide" showTickLabels="true" showTickMarks="true" />
-            <Slider fx:id="topOpSlider" layoutX="106.0" layoutY="136.0" majorTickUnit="0.5" max="1.0" onDragDetected="#topOpSlide" showTickLabels="true" showTickMarks="true" />
-            <Slider fx:id="topOffSlider" layoutX="106.0" layoutY="170.0" majorTickUnit="0.5" max="1.0" onDragDetected="#topOpSlide" showTickLabels="true" showTickMarks="true" />
-            <Slider fx:id="frSlider" layoutX="106.0" layoutY="209.0" majorTickUnit="0.5" max="1.0" onDragDetected="#frSlide" showTickLabels="true" showTickMarks="true" />
+            <Separator layoutX="10.0" layoutY="39.0" prefHeight="3.0" prefWidth="258.0" />
+            <Separator layoutX="6.0" layoutY="79.0" prefHeight="3.0" prefWidth="258.0" />
+            <Slider fx:id="bottOpSlider" layoutX="106.0" layoutY="101.0" majorTickUnit="0.5" max="1.0" minorTickCount="4" onDragDetected="#bottOpSlide" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
+            <Slider fx:id="topOpSlider" layoutX="106.0" layoutY="136.0" majorTickUnit="0.5" max="1.0" onDragDetected="#topOpSlide" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
+            <Slider fx:id="topOffSlider" layoutX="106.0" layoutY="170.0" majorTickUnit="0.5" max="1.0" onDragDetected="#topOpSlide" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
+            <Slider fx:id="frSlider" layoutX="106.0" layoutY="209.0" majorTickUnit="0.5" max="1.0" onDragDetected="#frSlide" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
             <Label layoutX="11.0" layoutY="100.0" text="Bottom Opacity" />
             <Label layoutX="14.0" layoutY="135.0" text="Top Opacity" />
             <Label layoutX="11.0" layoutY="169.0" text="Top Offset" />

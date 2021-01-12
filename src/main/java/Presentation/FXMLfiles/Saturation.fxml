@@ -8,25 +8,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.SATURATIONController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="227.0">
+      <Pane prefHeight="200.0" prefWidth="227.0" style="-fx-background-color: #c5b7c8; -fx-border-color: #896e8e; -fx-border-width: 5;">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Presests">
+            <Label layoutX="84.0" layoutY="14.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Presests">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Separator layoutY="43.0" prefWidth="200.0" />
-            <Label layoutX="14.0" layoutY="55.0" text="Saturation">
+            <Separator layoutX="14.0" layoutY="41.0" prefWidth="200.0" />
+            <Label layoutX="77.0" layoutY="53.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/label.css" text="Saturation">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Separator layoutY="79.0" prefWidth="200.0" />
-            <Slider fx:id="slider" layoutX="19.0" layoutY="100.0" majorTickUnit="50.0" min="-100.0" minorTickCount="5" onDragDetected="#slide" prefHeight="37.0" prefWidth="190.0" showTickLabels="true" showTickMarks="true" />
-            <Button layoutX="88.0" layoutY="152.0" mnemonicParsing="false" onAction="#ApplyBtnAction" text="Apply" />
+            <Separator layoutX="14.0" layoutY="81.0" prefWidth="200.0" />
+            <Slider fx:id="slider" layoutX="19.0" layoutY="100.0" majorTickUnit="50.0" min="-100.0" minorTickCount="5" onDragDetected="#slide" prefHeight="37.0" prefWidth="190.0" showTickLabels="true" showTickMarks="true" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/slider.css" />
+            <Button layoutX="88.0" layoutY="152.0" mnemonicParsing="false" onAction="#ApplyBtnAction" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button1.css" text="Apply" />
          </children>
       </Pane>
    </children>

@@ -7,46 +7,53 @@ import Business.ColorParameters.Hue;
 import Business.ColorParameters.Saturation;
 import Business.Effects.*;
 
+import Business.Filters.RGBFilter;
 import Business.IPhotoEditor;
 import Business.Operations.*;
 import Business.PhotoEditor;
-import Business.Shapes.Circle;
-import Business.Shapes.Line;
+import Business.Shapes.*;
 import Business.Shapes.Rectangle;
-import Business.Shapes.Text;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.shape.Shape;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-
-public class GUIController {
+public class GUIController implements Initializable {
     private IPhotoEditor photoEditor;
 
     @FXML
@@ -88,7 +95,11 @@ public class GUIController {
     private ColorPicker cpTextColor;
 
     @FXML
+    private Button res,crop,rotR,rotL,flipV,flipH,zoomI,zoomO;
+    @FXML
     private ComboBox<String> cbbFontStyle;
+    @FXML
+    private ComboBox<Integer> cbLayer;
     public double posX1,posY1,posX2,posY2;
     public int cnt=1;
     @FXML
@@ -98,7 +109,7 @@ public class GUIController {
     @FXML
     private ColorPicker bgColor;
     @FXML
-    private CheckBox bg;
+    private CheckBox bg, setText;
     @FXML
     private ComboBox<String> comboShapes;
    // private ObservableList<String> fonts= (ObservableList<String>) javafx.scene.text.Font.getFamilies();
@@ -106,6 +117,9 @@ public class GUIController {
     public TabPane getTabPanee() {
         return TabPanee;
     }
+    private double positionX = 0;
+    private double positionY = 0;
+    private Tools tools;
 
     @FXML
     private void initialize()
@@ -117,11 +131,120 @@ public class GUIController {
       //  cbbFontStyle.setItems(fonts);
         cbbFontStyle.getItems().addAll(Font.getFontNames());
         cbbFontStyle.setValue("Roboto");
+        tools=new Tools();
+
+
+    }
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private GridPane gridButtons;
+    @FXML
+    private TitledPane tpane1,tpane2;
+
+    @FXML
+    private AnchorPane anch1,anch2,anch0;
+
+    @FXML
+    private HBox hb1,hb2,hb3,hb4,hb5,hb6,hb7,hb8;
+    @FXML
+    private Pane p1,p2;
+    @FXML
+    private Menu fileM,editM,helpM,colorM,effectM,filterM;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Initialized");
+        imageView = new ImageView();
+        photoEditor = new PhotoEditor();
+        comboShapes.setItems(dbTypeList);
+        //  cbbFontStyle.setItems(fonts);
+        cbbFontStyle.getItems().addAll(Font.getFontNames());
+        cbbFontStyle.setValue("Roboto");
+        tools=new Tools();
+
+        //String image = EditorGUI.class.getResource("icon_crop.png").toExternalForm();
+        File f = new File("C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/icon_crop.png");
+        URL u = null;
+        try {
+            u = f.toURI().toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Image img = new Image(u.toExternalForm());
+        String cssLayout =
+                "-fx-background-image: url(icons8-sun-100.png);\n"
+            ;
+       // res.setStyle("-fx-background-color: #e6b3cc;\n");
+       // crop.setStyle("-fx-background-color: #993366;\n");
+        //rotL.setStyle("-fx-background-color:#e6b3cc;\n");
+        //rotR.setStyle("-fx-background-color: #d98cb3;\n");
+        //flipH.setStyle("-fx-background-color: #d98cb3;\n");
+        //flipV.setStyle("-fx-background-color: #d98cb3;\n");
+        //zoomI.setStyle("-fx-background-color: #d98cb3;\n");
+        //zoomO.setStyle("-fx-background-color: #d98cb3;\n");
+        String menuLayout="-fx-background-color:  #f2d9e6;\n";
+        String hbLayout="-fx-background-color: #df9fbf;\n";
+       // menuBar.setStyle("-fx-background-color: #25022c;;\n"+"-fx-opacity: 0.9");
+       // TabPanee.setStyle(menuLayout);
+       // gridButtons.setStyle("-fx-background-color: #f2d9e6");
+       // anch0.setStyle("-fx-background-color: #f2d9e6" +
+           //     "");
+       /* accordion.setStyle(menuLayout);
+        tpane1.setStyle(menuLayout);
+        tpane2.setStyle(menuLayout);
+        anch1.setStyle(menuLayout);
+        anch2.setStyle(menuLayout);
+        hb1.setStyle(hbLayout);
+        hb3.setStyle(hbLayout);
+        hb5.setStyle(hbLayout);
+        hb7.setStyle(hbLayout);
+        p2.setStyle(menuLayout);*/
+
+
 
     }
 
     public void OpenImageBtnAction(ActionEvent actionEvent) {
+
         FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files", "*.png"));
+        Image image=null;
+        try {
+            System.out.println("Showing image " + selectedFile.getName());
+            FileInputStream stream = new FileInputStream(selectedFile.getAbsolutePath());
+            image = new Image(selectedFile.toURI().toString());
+            imageView.setImage(image);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Tab t=new Tab();
+        Pane p=new Pane();
+        imageView.setFitHeight(p.getHeight());
+        imageView.setFitWidth(p.getWidth());
+        p.getChildren().addAll(imageView);
+        t.setText("NewImage");
+        t.setContent(p);
+        TabPanee.getTabs().add(t);
+
+
+
+      //  t.setStyle("-fx-background-color:  #ffb3cc;\n");
+
+       // javafx.scene.shape.Rectangle rectangle;
+       // rectangle = new javafx.scene.shape.Rectangle(0, 0, image.getWidth(), image.getHeight());
+        //rectangle.setStrokeWidth(lineSize);
+       // rectangle.setFill(new ImagePattern(image));
+       // imageView.setImage(new Image(rectangle));
+
+
+      //  getMainPane().getChildren().add(imageView);
+        //cbLayer.getItems().clear();
+       // rectangle.setStroke(strokeColor);
+       // rectangle.setOpacity(opacity/100);
+       /* FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files", "*.png"));
          Image image=null;
@@ -161,9 +284,35 @@ public class GUIController {
         tab1.closableProperty();
         tab1.setClosable(true);
         TabPanee.getTabs().add(tab1);
-        photoEditor.loadImage(selectedFile.getAbsolutePath());
+        photoEditor.loadImage(selectedFile.getAbsolutePath());*/
+
+        //Imagee i=new Imagee();
+        //i.image(cpFillColor.getValue(),wid)
     }
 
+    @FXML
+    void saveFileOnAction(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save File");
+        //fc.setInitialDirectory(new File("/home"));
+        fc.setInitialFileName("project");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG File", "*.png"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG File", "*.jpg"));
+        try {
+            File selectedFile = fc.showSaveDialog(new Stage());
+            if (selectedFile != null) {
+                Image snapshot = TabPanee.getSelectionModel().getSelectedItem().getContent().snapshot(null, null);
+
+                //ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", selectedFile);
+            }
+        } catch (Exception e) {
+        }
+    }
+    @FXML
+    private Accordion accordion;
+    public Pane getMainPane(){
+        return (Pane) TabPanee.getSelectionModel().getSelectedItem().getContent();
+    }
     @FXML
     void clicked(MouseEvent event) {
         MouseEvent event2;
@@ -175,12 +324,118 @@ public class GUIController {
             posX2 = event.getX();
             posY2 = event.getY()-30;
             System.out.println(posX2+" "+posY2);
-         }
+        }
+        try{
+        if(accordion.getExpandedPane().getText().equals("Drawing Tools")) {
+            if (comboShapes.getValue().equals("Line")&& cnt % 2 == 0) {
+                getMainPane().getChildren().addAll(tools.line(sldBorderSize.getValue(), cpBorderColor.getValue(), posX1, posY1, posX2, posY2));
+                layerCount();
+            }else
+            {
+                if (comboShapes.getValue().equals("Rectangle") && cnt % 2 == 0) {
+                    Rectangle r = new Rectangle();
+                    //  r.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+                    Shape shape;
+                    shape = tools.rect(cpFillColor.getValue(), cpBorderColor.getValue(), posX1, posY1, posX2 - posX1, posY2 - posY1, sldBorderSize.getValue(),filled.isSelected());
+                    DragResizeMod.makeResizable(shape);
+                    getMainPane().getChildren().addAll(shape);
+                layerCount();
+                }
+                else
+                {
+                    if (comboShapes.getValue().equals("Circle") && cnt % 2 == 0) {
+                        Circle c = new Circle();
+                        Shape shape;
+                        shape = tools.oval(cpFillColor.getValue(), cpBorderColor.getValue(), posX1, posY1, posX2 - posX1, sldBorderSize.getValue(),filled.isSelected());
+                        DragResizeMod.makeResizable(shape);
+                        getMainPane().getChildren().addAll(shape);
+                    layerCount();
+                    }
+
+
+
+                    }
+            }
+        }else{
+            if(accordion.getExpandedPane().getText().equals("Text Tools")){
+                if(cnt%2==0){
+                    tfTextString.setText("");
+                }
+                Shape shape;
+                shape=tools.text(tfTextString.getText(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),cbbFontStyle.getValue(),posX1,posY1);
+              //  MouseControlUtil.makeDraggable(shape);
+
+                getMainPane().getChildren().addAll(shape);
+                layerCount();
+
+            }
+        }}
+        catch(Exception e){
+            System.out.println("sc");
+        }
+        cnt++;
+        layerCount();
+    }
+    @FXML
+    void RemoveOnAction(ActionEvent event) {
+            removeShape();
+    }
+
+    public void clickF() {
+        // Tools t=new Tools();
+    }
+
+       /* getMainPane().setOnMouseClicked(event1 -> {
+            posX1 = event1.getX();
+            posY1 = event1.getY();
+            if(accordion.getExpandedPane().getText().equals("Drawing Tools")) {
+                if (comboShapes.getValue().equals("Line")) {
+                    // System.out.println(item);
+                    getMainPane().setOnMouseClicked(event2 -> {
+                        double p1x = posX1;
+                        double p1y = posY1;
+                        double p2x = event2.getX();
+                        double p2y = event2.getY();
+                        System.out.println(p1x + " " + p1y + " " + p2x + " " + p2y);
+                       // getMainPane().getChildren().addAll(t.line(sldBorderSize.getValue(), cpBorderColor.getValue(), p1x, p1y, p2x, p2y));
+                        Shape shape;
+                        shape=t.line(sldBorderSize.getValue(), cpBorderColor.getValue(), p1x, p1y, p2x, p2y);
+
+
+
+                        positionX = p2x;
+                        positionY = p2y;
+                        //layerCount();
+                    });
+
+                }else{
+                    if (comboShapes.getValue().equals("Rectangle") && cnt % 2 == 0) {
+               Rectangle r = new Rectangle();
+                r.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+
+                Shape shape;
+                shape = t.rect(cpFillColor.getValue(), cpBorderColor.getValue(), posX1, posY1, posX2-posX1, posY2-posY1, sldBorderSize.getValue());
+                //tools.draw();
+                DragResizeMod.makeResizable(shape);
+                getMainPane().getChildren().addAll(shape);
+                }
+                }
+            }
+        });
+
+    }*/
+       /* Tools tools=new Tools();
        // System.out.println(posX+" "+posY);
         if(accordion.getExpandedPane().getText().equals("Drawing Tools")) {
             if (comboShapes.getValue().equals("Rectangle") && cnt % 2 == 0) {
-                Rectangle r = new Rectangle();
+              /*  Rectangle r = new Rectangle();
                 r.draw(getCanvas(), cpFillColor.getValue(), cpBorderColor.getValue(), sldBorderSize.getValue(), filled.isSelected(), posX1, posY1, posX2, posY2);
+
+                Shape shape;
+                shape = t.rect(cpFillColor.getValue(), cpBorderColor.getValue(), posX1, posY1, posX2-posX1, posY2-posY1, sldBorderSize.getValue());
+                //tools.draw();
+                DragResizeMod.makeResizable(shape);
+                getMainPane().getChildren().addAll(shape);
             } else {
                 if (comboShapes.getValue().equals("Circle") && cnt % 2 == 0) {
                     Circle c = new Circle();
@@ -199,9 +454,12 @@ public class GUIController {
                 t.setText(getCanvas(),tfTextString.getText(),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),posX1,posY1);
             }
         }
-        cnt++;
-    }
+        cnt++;*/
+    //}
+    @FXML
+    void slideBorder(MouseEvent event) {
 
+    }
     @FXML
     void NewImageBtnAction(ActionEvent event) {
 
@@ -259,9 +517,20 @@ public class GUIController {
         graphics_context.fillOval(30, 30, 70, 70);*/
 
         Tab tab=new Tab();
-        tab.setContent(canvas);
+        Pane p=new Pane();
+
+       // tab.setContent(canvas);
+
+        p.getChildren().addAll(tools.rect(Color.WHITE,null,0.0,0.0,500.0,500.0,0.0,true));
+        tab.setContent(p);
+        /*if(bg.isSelected() && accordion.getExpandedPane().getText().equals("Drawing Tools")){
+            getMainPane().getChildren().addAll(tools.rect(bgColor.getValue(),null,0.0,0.0,getMainPane().getWidth(),getMainPane().getHeight(),0.0,true));
+        }*/
         tab.setText("BlankTab");
         TabPanee.getTabs().add(tab);
+       // getMainPane().getChildren().addAll(tools.rect(Color.WHITE,null,0.0,0.0,getMainPane().getWidth(),getMainPane().getHeight(),0.0,true));
+
+        cbLayer.getItems().clear();
 
     }
 
@@ -307,12 +576,13 @@ public class GUIController {
 
     @FXML
     void ResizeBtnAction(ActionEvent event) {
-        initNewController(resContr,"src\\main\\java\\Presentation\\FXMLfiles\\Resize.fxml","Resize");
+        initNewController(resContr,"src\\main\\java\\Presentation\\FXMLfiles\\Resize.fxml","Resize","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     public void inflate(RESIZEController contr){
        int i=TabPanee.getSelectionModel().getSelectedIndex();
-       ImageView img= (ImageView) TabPanee.getTabs().get(i).getContent();
+       //ImageView img= (ImageView) TabPanee.getTabs().get(i).getContent();
+        ImageView img=getImage();
        Resize res=new Resize();
        res.apply(img);
        img.setFitWidth(Double.parseDouble(contr.getW().getText()));
@@ -378,7 +648,7 @@ public class GUIController {
         zoomOut.apply(getImage());
     }
 
-    public void initNewController(Controller c,String path,String title){
+    public void initNewController(Controller c,String path,String title,String pathCss){
         try{
             FXMLLoader loader=new FXMLLoader();
             FileInputStream fxmlStream = null;
@@ -386,8 +656,11 @@ public class GUIController {
             Parent parent=loader.load(fxmlStream);
             c=loader.getController();
             Stage stage =new Stage();
+
             stage.setTitle(title);
-            stage.setScene(new Scene(parent));
+            Scene s=new Scene(parent);
+            s.getStylesheets().add(pathCss);
+            stage.setScene(s);
             stage.show();
             c.init(this);
 
@@ -398,30 +671,30 @@ public class GUIController {
 
     @FXML
     void BrightnessOnAction(ActionEvent event) {
-        initNewController(brightContr,"src\\main\\java\\Presentation\\FXMLfiles\\Brightness.fxml","Brightness");
+        initNewController(brightContr,"src\\main\\java\\Presentation\\FXMLfiles\\Brightness.fxml","Brightness","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
 
     }
 
 
     @FXML
     void SaturationOnAction(ActionEvent event) {
-        initNewController(saturContr,"src\\main\\java\\Presentation\\FXMLfiles\\Saturation.fxml","Sturation");
+        initNewController(saturContr,"src\\main\\java\\Presentation\\FXMLfiles\\Saturation.fxml","Sturation","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     @FXML
     void ContrastOnAction(ActionEvent event) {
-        initNewController(contrContr,"src\\main\\java\\Presentation\\FXMLfiles\\Contrast.fxml","Contrast");
+        initNewController(contrContr,"src\\main\\java\\Presentation\\FXMLfiles\\Contrast.fxml","Contrast","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     @FXML
     void HueOnAction(ActionEvent event) {
-        initNewController(hueContr,"src\\main\\java\\Presentation\\FXMLfiles\\Hue.fxml","Hue");
+        initNewController(hueContr,"src\\main\\java\\Presentation\\FXMLfiles\\Hue.fxml","Hue","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
 
     @FXML
     void BoxBlurOnAction(ActionEvent event) {
-        initNewController(boxContr,"src\\main\\java\\Presentation\\FXMLfiles\\BoxBlur.fxml","BoxBlur");
+        initNewController(boxContr,"src\\main\\java\\Presentation\\FXMLfiles\\BoxBlur.fxml","BoxBlur","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     public void boxBlur(BOXBLURController contr){
@@ -454,9 +727,14 @@ public class GUIController {
        // return (ImageView) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
         SnapshotParameters param=new SnapshotParameters();
         param.setFill(Color.TRANSPARENT);
-        ImageView img=new ImageView();
-        img.setImage(getCanvas().snapshot(param,null));
-        return img;
+        //ImageView img=new ImageView();
+        //img.setImage(getCanvas().snapshot(param,null));
+       // img.setImage((Image)getMainPane().getChildren().get(0));
+       //ImageView i= (ImageView) getMainPane().getChildren().get(TabPanee.getSelectionModel().getSelectedIndex());
+       Pane p= (Pane) TabPanee.getSelectionModel().getSelectedItem().getContent();
+       ImageView i= (ImageView) p.getChildren().get(0);
+
+        return i;
     }
     public void motionBlur(MOTIONBController contr){
         double radius=  contr.getRadiusSlider().getValue();
@@ -491,64 +769,42 @@ public class GUIController {
 
     @FXML
     void BloomOnAction(ActionEvent event) {
-        initNewController(bloomContr,"src\\main\\java\\Presentation\\FXMLfiles\\Bloom.fxml","Bloom");
+        initNewController(bloomContr,"src\\main\\java\\Presentation\\FXMLfiles\\Bloom.fxml","Bloom","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
     @FXML
     void GaussianBlurOnAction(ActionEvent event) {
-        initNewController(gaussContr, "src\\main\\java\\Presentation\\FXMLfiles\\GaussianBlur.fxml","GaussianBlur");
+        initNewController(gaussContr, "src\\main\\java\\Presentation\\FXMLfiles\\GaussianBlur.fxml","GaussianBlur","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     @FXML
     void MotionBlurOnAction(ActionEvent event) {
-        initNewController(motionContr, "src\\main\\java\\Presentation\\FXMLfiles\\MotionBlur.fxml", "MotionBlur");
+        initNewController(motionContr, "src\\main\\java\\Presentation\\FXMLfiles\\MotionBlur.fxml", "MotionBlur","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     @FXML
     void ReflectionOnAction(ActionEvent event) {
-            initNewController(reflContr,"src\\main\\java\\Presentation\\FXMLfiles\\Reflection.fxml","Reflection");
+            initNewController(reflContr,"src\\main\\java\\Presentation\\FXMLfiles\\Reflection.fxml","Reflection","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
 
     @FXML
     void GlowOnAction(ActionEvent event) {
-        initNewController(glowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Glow.fxml","Glow");
+        initNewController(glowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Glow.fxml","Glow","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
     @FXML
     void SepiaOnAction(ActionEvent event) {
-        initNewController(sepiaContr,"src\\main\\java\\Presentation\\FXMLfiles\\Sepia.fxml","Sepia Tone");
+        initNewController(sepiaContr,"src\\main\\java\\Presentation\\FXMLfiles\\Sepia.fxml","Sepia Tone","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
 
 
     @FXML
     void ShadowOnAction(ActionEvent event) {
-        initNewController(shadowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Shadow.fxml","Shadow");
+        initNewController(shadowContr,"src\\main\\java\\Presentation\\FXMLfiles\\Shadow.fxml","Shadow","file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/pane.css");
     }
     public Canvas getCanvas(){
         return (Canvas) TabPanee.getTabs().get(TabPanee.getSelectionModel().getSelectedIndex()).getContent();
     }
-   //@FXML
-   /* void RectOnAction(ActionEvent event) {
-        //Rectangle rect=new Rectangle(10,10,200,200);
-        //rect.setFill(Color.BLUE);
-        //GraphicsContext graphics_context =
-
-        Rectangle r=new Rectangle();
-        r.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-
-    }
-    @FXML
-    void CircleOnAction(ActionEvent event) {
-        Circle ci=new Circle();
-        ci.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-
-    }
-    @FXML
-    void LineOnAction(ActionEvent event) {
-        Line l=new Line();
-        l.draw(getCanvas(),cpFillColor.getValue(),cpBorderColor.getValue(),sldBorderSize.getValue(),filled.isSelected(),posX1,posY1,posX2,posY2);
-
-    }*/
     @FXML
     void fill(ActionEvent event) {
 
@@ -557,42 +813,104 @@ public class GUIController {
     @FXML
     void BackgroundOnAction(MouseEvent event){
         if(bg.isSelected() && accordion.getExpandedPane().getText().equals("Drawing Tools")){
-            Rectangle r=new Rectangle();
-            r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
+            getMainPane().getChildren().addAll(tools.rect(bgColor.getValue(),null,0.0,0.0,getMainPane().getWidth(),getMainPane().getHeight(),0.0,true));
         }
     }
 
     @FXML
     void changeBackground(ActionEvent event) {
         if(bg.isSelected() && accordion.getExpandedPane().getText().equals("Drawing Tools")){
-            Rectangle r=new Rectangle();
-            r.draw(getCanvas(),bgColor.getValue(),null,0,bg.isSelected(),0,0,getCanvas().getWidth(),getCanvas().getHeight());
+            getMainPane().getChildren().addAll(tools.rect(bgColor.getValue(),null,0.0,0.0,getMainPane().getWidth(),getMainPane().getHeight(),0.0,true));
         }
 
     }
 
     @FXML
     void write(KeyEvent event) {
-        Text t=new Text();
-        t.setText(getCanvas(),tfTextString.getText(),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),posX1,posY1);
+       // Text t=new Text();
+       // t.setText(getCanvas(),tfTextString.getText(),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),posX1,posY1);
 
         //System.out.println(accordion.getExpandedPane().getText());
+        Shape shape;
+       // if(setText.isSelected()) {
+            shape = tools.text(tfTextString.getText(), Double.parseDouble(tfFontSize.getText()), cpTextColor.getValue(), cbbFontStyle.getValue(), posX1, posY1);
+            //  MouseControlUtil.makeDraggable(shape);
+            System.out.println(tfTextString.getText());
+            getMainPane().getChildren().addAll(shape);
+            layerCount();
+        //}/*else
+        /*{
+            Dialog<String> dialog = new Dialog<String>();
+            dialog.setTitle("Dialog");
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            dialog.setContentText("This is a sample dialog");
+            dialog.getDialogPane().getButtonTypes().add(type);
+            dialog.showAndWait();
 
+        }*/
     }
     int c=1;
-    @FXML
-    private Accordion accordion;
+
     @FXML
     void DeleteOnAction(ActionEvent event) {
-        tfTextString.setText( tfTextString.getText().substring(0, tfTextString.getText().length()-1));
+        if(tfTextString.getText().length()!=0){
+            tfTextString.setText( tfTextString.getText().substring(0, tfTextString.getText().length()-1));
+        }
+
         Text t=new Text();
-        t.clear(getCanvas(),tfTextString.getText(),tfTextString.getText().substring(0, tfTextString.getText().length()-c),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),bgColor.getValue(),posX1,posY1);
+        t.clear(getCanvas(),tfTextString.getText(),tfTextString.getText().substring(0, tfTextString.getText().length()-c+1),cbbFontStyle.getValue(),Double.parseDouble(tfFontSize.getText()),cpTextColor.getValue(),bgColor.getValue(),posX1,posY1);
         if(tfTextString.getText().length()==0){
             c=0;
         }
         else {
             c++;
         }
+    }
+
+    public void layerCount() {
+        cbLayer.getItems().clear();
+        for(int i = 0; i<getMainPane().getChildren().size();i++) {
+            cbLayer.getItems().add(i);
+            cbLayer.setValue(i);
+        }
+    }
+    @FXML
+    void layer(ActionEvent event) {
+
+    }
+    public void removeShape() {
+        int itemLayer =cbLayer.getSelectionModel().getSelectedItem().intValue();
+        if(accordion.getExpandedPane().getText().equals("Text Tools") && tfTextString.getText().length()!=0){
+            tfTextString.setText( tfTextString.getText().substring(0, tfTextString.getText().length()-1));
+        }
+        getMainPane().getChildren().remove(itemLayer);
+        cbLayer.getItems().remove(itemLayer);
+        layerCount();
+    }
+
+    @FXML
+    void BlackAndWhiteOnAction(ActionEvent event) {
+        ColorAdjust colorAdjust=new ColorAdjust();
+        colorAdjust.setSaturation(-1);
+        ImageView img=getImage();
+        img.setEffect(colorAdjust);
+    }
+    @FXML
+    void GreenOnAction(ActionEvent event) {
+
+    }
+    @FXML
+    void BlueOnAction(ActionEvent event) {
+
+    }
+    @FXML
+    void RedOnAction(ActionEvent event) {
+        RGBFilter r=new RGBFilter();
+        r.apply(getImage(),0.0);
+    }
+    @FXML
+    void setOnAction(ActionEvent event) {
+
     }
 
 }

@@ -6,9 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class EditorGUI extends Application {
@@ -23,7 +26,8 @@ public class EditorGUI extends Application {
         // Create the FXMLLoader
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "src\\main\\java\\Presentation\\FXMLfiles\\gui_test.fxml";
+        //String fxmlDocPath = "src\\main\\java\\Presentation\\FXMLfiles\\gui_test.fxml";
+        String fxmlDocPath = "src\\main\\java\\Presentation\\gui_test.fxml";
         FileInputStream fxmlStream = null;
         try {
             fxmlStream = new FileInputStream(fxmlDocPath);
@@ -42,6 +46,23 @@ public class EditorGUI extends Application {
         }
 
          scene = new Scene(root);
+      // scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Roboto");
+      /*  File file = new File("style.css");
+        URL url = null;
+        try {
+            url = file.toURI().toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        scene.getStylesheets().add(url.toExternalForm());*/
+        //scene.getStylesheets().add("src/main/resources/css/style.css");
+       // scene.getStylesheets().add(getClass().getResource().);
+       //getClass().getClassLoader().getResource("css/style.css").toExternalForm();
+       // scene.getStylesheets().add(getClass().getResource("Presentation.style").toExternalForm());
+       // scene.getStylesheets().add
+         //       (Login.class.getResource("Login.css").toExternalForm());
+        //primaryStage.show();
+        scene.getStylesheets().add("file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/style.css");
         stage.setScene(scene);
         stage.setTitle("PhotoEditor");
         stage.show();

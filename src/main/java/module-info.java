@@ -3,8 +3,9 @@ module PhotoEditor {
     requires javafx.graphics;
     requires javafx.fxml;
     requires  javafx.base;
+    requires  java.desktop;
+   // modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.swing', 'javafx.base'
 
-    requires java.desktop;
     opens Presentation;
 
 }
