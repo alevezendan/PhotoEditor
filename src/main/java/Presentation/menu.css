@@ -1,0 +1,28 @@
+
+.menu-bar{
+    -fx-background-color: #25022c;
+}
+
+
+.menu:hover{
+    -fx-background-color: #5f4b63;
+    -fx-border-size: 2;
+}
+.menu-bar .label {
+    -fx-font-size: 13 pt;
+    -fx-font-family: "Calibri";
+    -fx-text-fill: #dedede;
+
+}
+
+.menu:showing{
+    -fx-background-color: #5f4b63;
+}
+
+.context-menu{
+    -fx-background-color: #896e8e;
+}
+
+.menu-item:hover{
+    -fx-background-color: #503256;
+}

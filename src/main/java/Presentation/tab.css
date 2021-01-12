@@ -1,0 +1,15 @@
+.tab-pane{
+ -fx-background-color: #FFFFFF;
+ }
+ 
+ .tab-pane .tab{
+	-fx-background-color:#896e8e;
+	-fx-font-size: 12px;
+     -fx-font-family: 'Roboto', sans-serif;
+     -fx-text-fill: white;
+     -fx-opacity: 1;
+	}
+	
+ .tab-pane .fade{
+	 -fx-background-color:#FFFFFF;;
+ }

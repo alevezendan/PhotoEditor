@@ -1,0 +1,7 @@
+.label{
+    -fx-font-size: 15px;
+    -fx-font-family: 'Calibri', sans-serif;
+
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}

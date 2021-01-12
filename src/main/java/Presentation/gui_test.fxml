@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/vbox.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.GUIController">
+    <MenuBar fx:id="menuBar" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/menu.css" VBox.vgrow="NEVER">
+        <Menu fx:id="fileM" mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#NewImageBtnAction" text="New" />
+            <MenuItem fx:id="openImageBtn" mnemonicParsing="false" onAction="#OpenImageBtnAction" onMenuValidation="#OpenImageBtnAction" text="Open Image" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFileOnAction" text="Save" />
+        </Menu>
+        <Menu fx:id="editM" mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Undo" />
+         <MenuItem mnemonicParsing="false" onAction="#DuplicateAction" text="Duplicate" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+        </Menu>
+        <Menu fx:id="helpM" mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About PhotoEditorApp" />
+        </Menu>
+        <Menu fx:id="colorM" mnemonicParsing="false" text="Color">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Balance" />
+                <MenuItem fx:id="saturation" mnemonicParsing="false" onAction="#SaturationOnAction" text="Saturation" />
+                <MenuItem mnemonicParsing="false" onAction="#BrightnessOnAction" text="Brightness" />
+                <MenuItem mnemonicParsing="false" onAction="#ContrastOnAction" text="Contrast" />
+                <MenuItem mnemonicParsing="false" text="Sepia" />
+                <MenuItem mnemonicParsing="false" text="Invert" />
+            <MenuItem mnemonicParsing="false" onAction="#HueOnAction" text="Hue" />
+            </items>
+        </Menu>
+      <Menu fx:id="effectM" mnemonicParsing="false" text="Effect">
+         <items>
+            <Menu mnemonicParsing="false" text="Blur">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#BoxBlurOnAction" text="BoxBlur" />
+                  <MenuItem mnemonicParsing="false" onAction="#GaussianBlurOnAction" text="GaussianBlur" />
+                  <MenuItem mnemonicParsing="false" onAction="#MotionBlurOnAction" text="MotionBlur" />
+              </items>
+            </Menu>
+            <MenuItem mnemonicParsing="false" onAction="#ReflectionOnAction" text="Reflection" />
+            <MenuItem mnemonicParsing="false" onAction="#BloomOnAction" text="Bloom" />
+            <MenuItem mnemonicParsing="false" onAction="#GlowOnAction" text="Glow" />
+            <MenuItem mnemonicParsing="false" onAction="#SepiaOnAction" text="SepiaTone" />
+            <MenuItem mnemonicParsing="false" onAction="#ShadowOnAction" text="Shadow" />
+         </items>
+      </Menu>
+      <Menu fx:id="filterM" mnemonicParsing="false" text="Filter">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#BlackAndWhiteOnAction" text="Black&amp;White" />
+            <Menu mnemonicParsing="false" text="RGBImage">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#RedOnAction" text="RED" />
+                  <MenuItem mnemonicParsing="false" onAction="#BlueOnAction" text="BLUE" />
+                <MenuItem mnemonicParsing="false" onAction="#GreenOnAction" text="GREEN" />
+              </items>
+            </Menu>
+        </items>
+      </Menu>
+    </MenuBar>
+    <AnchorPane fx:id="anch0" maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <GridPane fx:id="gridButtons" layoutX="-1.0" layoutY="7.0" prefHeight="365.0" prefWidth="59.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="41.599981689453124" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="92.8" minHeight="10.0" prefHeight="52.00001220703125" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="84.19998779296874" minHeight="10.0" prefHeight="44.80000762939453" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="81.39999237060547" minHeight="10.0" prefHeight="47.99999389648437" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="74.00000610351563" minHeight="10.0" prefHeight="48.800024414062506" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="71.19998779296873" minHeight="10.0" prefHeight="41.20001220703125" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="65.19998779296873" minHeight="10.0" prefHeight="51.19997558593752" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="49.80002441406248" minHeight="10.0" prefHeight="49.80002441406248" vgrow="SOMETIMES" />
+            </rowConstraints>
+
+            <children>
+                <Button fx:id="res" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#ResizeBtnAction" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icon_crop.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="rotL" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#RotateLeftBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+
+               <font>
+                  <Font name="Calibri Bold" size="13.0" />
+               </font>
+               <effect>
+                  <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                     <bumpInput>
+                        <DropShadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant color="#896e8e" />
+                     </light>
+                  </Lighting>
+               </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-rotate-left-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="rotR" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#RotateRightBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-rotate-right-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="flipH" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#FlipHorizontalBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-flip-horizontal-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="flipV" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#FlipVerticalBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-flip-vertical-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="zoomI" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#ZoomInBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="@file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-zoom-in-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+
+                <Button fx:id="zoomO" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#ZoomOutBtnAction" opacity="0.79" prefHeight="30.0" prefWidth="50.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/button.css" textFill="#0a0107" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Calibri Bold" size="13.0" />
+                </font>
+                <effect>
+                    <Lighting diffuseConstant="1.21" specularConstant="1.46" specularExponent="21.12" surfaceScale="2.62">
+                        <bumpInput>
+                            <DropShadow />
+                        </bumpInput>
+                        <light>
+                            <Light.Distant color="#896e8e" />
+                        </light>
+                    </Lighting>
+                </effect>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/FXMLfiles/icons8-zoom-out-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            </children>
+        </GridPane>
+        <Pane layoutX="58.0" layoutY="1.0" prefHeight="351.0" prefWidth="563.0" visible="false">
+            <children>
+                <ImageView fx:id="imageView" fitHeight="10.0" fitWidth="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            </children></Pane>
+        <TabPane fx:id="TabPanee" layoutX="74.0" layoutY="14.0" onMouseClicked="#clicked" prefHeight="351.0" prefWidth="384.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/tab.css" tabClosingPolicy="ALL_TABS" />
+      <Pane fx:id="p2" layoutX="469.0" layoutY="10.0" prefHeight="366.0" prefWidth="170.0" stylesheets="@paneWhite.css">
+         <children>
+            <Accordion fx:id="accordion" layoutY="9.0" prefHeight="267.0" prefWidth="170.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/acc.css">
+               <panes>
+                  <TitledPane fx:id="tpane1" prefHeight="277.0" prefWidth="170.0" text="Drawing Tools" textFill="#edecec">
+                   <content>
+                       <AnchorPane fx:id="anch1" minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="169.0">
+                           <children>
+                               <VBox prefHeight="258.0" prefWidth="159.0">
+                                   <children>
+                                       <HBox fx:id="hb1" prefHeight="42.0" prefWidth="277.0" spacing="10.0">
+                                           <children>
+                                               <Label text="Fill Color    " />
+                                               <ColorPicker fx:id="cpFillColor" editable="true" maxHeight="42.0" maxWidth="100.0" prefHeight="42.0" prefWidth="62.0">
+                                                   <value>
+                                                       <Color blue="0.156" green="0.106" red="0.78" />
+                                                   </value>
+                                               </ColorPicker>
+                                           </children>
+                                           <VBox.margin>
+                                               <Insets top="2.0" />
+                                           </VBox.margin>
+                                           <padding>
+                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                           </padding>
+                                       </HBox>
+                                       <HBox fx:id="hb2" prefHeight="47.0" prefWidth="196.0" spacing="10.0">
+                                           <children>
+                                               <Label text="Border Size" />
+                                               <Slider fx:id="sldBorderSize" majorTickUnit="5.0" max="10.0" minorTickCount="2" onDragDetected="#slideBorder" prefHeight="14.0" prefWidth="78.0" showTickLabels="true" showTickMarks="true" value="0.0" />
+                                           </children>
+                                           <padding>
+                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                           </padding>
+                                       </HBox>
+                                       <HBox fx:id="hb3" prefHeight="36.0" prefWidth="270.0" spacing="10.0">
+                                           <padding>
+                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                           </padding>
+                                       <children>
+                                               <Label text="Border Color " />
+                                               <ColorPicker fx:id="cpBorderColor" editable="true" prefHeight="26.0" prefWidth="55.0">
+                                                   <value>
+                                                       <Color blue="0.116" green="0.0" red="0.234" />
+                                                   </value>
+                                               </ColorPicker>
+                                       </children>
+                                       </HBox>
+                                       <HBox fx:id="hb4" prefHeight="27.0" prefWidth="283.0" spacing="10.0">
+                                           <padding>
+                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                           </padding>
+                                       <children>
+                                          <Label text="Background   " />
+                                          <ColorPicker fx:id="bgColor" onAction="#changeBackground" prefHeight="25.0" prefWidth="50.0" />
+                                          <CheckBox fx:id="bg" mnemonicParsing="false" onMouseClicked="#BackgroundOnAction" />
+                                       </children>
+                                       </HBox>
+                                    <Pane fx:id="p1" prefHeight="55.0" prefWidth="159.0">
+                                       <children>
+                                          <CheckBox fx:id="filled" layoutX="38.0" layoutY="27.0" mnemonicParsing="false" onAction="#fill" text="FilledShape" />
+                                          <ComboBox fx:id="comboShapes" layoutX="5.0" layoutY="2.0" prefWidth="150.0" promptText="Shapes" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
+                                       </children>
+                                    </Pane>
+                                   </children>
+                               </VBox>
+                           </children>
+                       </AnchorPane>
+                   </content>
+                   <padding>
+                       <Insets top="2.0" />
+                   </padding>
+                  </TitledPane>
+                   <TitledPane fx:id="tpane2" animated="false" layoutX="10.0" layoutY="10.0" prefHeight="228.0" prefWidth="170.0" text="Text Tools" textFill="WHITE">
+                       <content>
+                           <AnchorPane fx:id="anch2" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="169.0">
+                               <children>
+                                   <VBox prefHeight="155.0" prefWidth="190.0">
+                                       <children>
+                                           <HBox fx:id="hb5" layoutX="10.0" layoutY="12.0" prefHeight="35.0" prefWidth="128.0" spacing="10.0">
+                                               <children>
+                                                   <TextField fx:id="tfTextString" onKeyPressed="#write" prefHeight="26.0" prefWidth="126.0" promptText="hello world" />
+                                          <CheckBox fx:id="setText" mnemonicParsing="false" onAction="#setOnAction" />
+                                               </children>
+                                               <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                               </padding>
+                                           </HBox>
+                                           <HBox fx:id="hb6" prefHeight="36.0" prefWidth="190.0" spacing="10.0">
+                                               <children>
+                                                   <Label text="Font Size   " />
+                                                   <TextField fx:id="tfFontSize" prefHeight="26.0" prefWidth="62.0" promptText="12" text="12" />
+                                               </children>
+                                               <VBox.margin>
+                                                   <Insets top="2.0" />
+                                               </VBox.margin>
+                                               <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                               </padding>
+                                           </HBox>
+                                           <HBox fx:id="hb7" spacing="10.0">
+                                               <children>
+                                                   <Label text="Text Color" />
+                                                   <ColorPicker fx:id="cpTextColor" editable="true" maxHeight="42.0" maxWidth="100.0" prefHeight="42.0" prefWidth="65.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css">
+                                                       <value>
+                                                           <Color blue="0.156" green="0.106" red="0.78" />
+                                                       </value>
+                                                   </ColorPicker>
+                                               </children>
+                                               <VBox.margin>
+                                                   <Insets top="2.0" />
+                                               </VBox.margin>
+                                               <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                               </padding>
+                                           </HBox>
+                                           <HBox fx:id="hb8" layoutX="10.0" layoutY="12.0" spacing="10.0">
+                                               <children>
+                                                   <Label text="Font Style  " />
+                                                   <ComboBox fx:id="cbbFontStyle" prefHeight="26.0" prefWidth="51.0" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
+                                               </children>
+                                               <padding>
+                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                               </padding>
+                                           </HBox>
+                                       </children>
+                                   </VBox>
+                              <Button layoutX="59.0" layoutY="163.0" mnemonicParsing="false" onAction="#DeleteOnAction" stylesheets="@button1.css" text="Delete" />
+                               </children>
+                           </AnchorPane>
+                       </content>
+                       <padding>
+                           <Insets top="2.0" />
+                       </padding>
+                   </TitledPane>
+               </panes>
+            </Accordion>
+            <ComboBox fx:id="cbLayer" layoutX="9.0" layoutY="315.0" onAction="#layer" prefHeight="25.0" prefWidth="156.0" promptText="Layers" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
+            <Button layoutX="56.0" layoutY="276.0" mnemonicParsing="false" onAction="#RemoveOnAction" prefHeight="28.0" prefWidth="59.0" stylesheets="@button1.css" text="Remove" />
+            <ComboBox editable="true" layoutX="10.0" layoutY="340.0" prefHeight="25.0" prefWidth="156.0" promptText="Brushes" stylesheets="file:/C:/Ale/AN3/IS/PhotoEditor/src/main/java/Presentation/combo.css" />
+         </children>
+      </Pane>
+    </AnchorPane>
+   <Pane prefHeight="200.0" prefWidth="200.0" />
+</VBox>

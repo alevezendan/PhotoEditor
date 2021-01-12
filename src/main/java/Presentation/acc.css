@@ -1,0 +1,19 @@
+.accordion {
+    -fx-margin: 4 0 4 5;
+}
+
+.accordion .titled-pane > *.content{
+    -fx-background-color:#896e8e;
+    -fx-border-color: #503256;
+}
+
+.accordion .titled-pane .title {
+     -fx-background-color: #5f4b63;
+}
+
+.accordion .titled-pane .title .label{
+     -fx-font-size: 15px;
+     -fx-font-family: 'Roboto', sans-serif;
+     -fx-text-fill: white;
+     -fx-opacity: 1;
+}

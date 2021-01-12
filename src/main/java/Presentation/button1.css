@@ -1,0 +1,8 @@
+
+.button{
+    -fx-background-color: #5f4b63;
+    -fx-font-size: 8pt;
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
